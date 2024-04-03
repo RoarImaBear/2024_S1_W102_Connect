@@ -1,13 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Home from "./pages/home";
 
 function App() {
+
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          THIS IS SEB'S CHANNEL
+          Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
