@@ -6,7 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
 firebase-debug.*.log*
-build
+
+
+build/
+src/LocalStyle.css
 
 # Firebase cache
 .firebase/
