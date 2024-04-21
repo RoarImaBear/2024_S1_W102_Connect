@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Home from "./pages/home";
+import SignUpForm from './pages/SignUpForm';
+import LoginForm from './pages/LoginForm';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
 
 
   return (
-    <div className="App">
-      <h1>Hello team</h1>
-      <Home/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/signup" replace />} />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
