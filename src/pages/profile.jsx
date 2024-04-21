@@ -10,11 +10,12 @@ export default function Home(){
             <section className="main-container">
                 {/* name age gender and photo */}
                 <div> 
-                    <form onSubmit ={handleSave}>
+                    <form action="">
+                    {/* <form onSubmit ={handleSave}> */}
                     <label>Please Enter Name</label>
-                    <input type ="text" ref={Name}/>
+                    {/* <input type ="text" ref={Name}/> */}
                     <label>Please Enter Age</label>
-                    <input type ="integer" ref={Name}/>
+                    {/* <input type ="integer" ref={Name}/> */}
                     <button type='submit'>Save</button>
                     </form>
                 </div>
@@ -26,7 +27,7 @@ export default function Home(){
                 {/* Description */}
                 <div>
                 <label>Please Enter a Description</label>
-                    <input type ="String" ref={Description}/>
+                    {/* <input type ="String" ref={Description}/> */}
                 </div>
 
                 {/* Interests */}
