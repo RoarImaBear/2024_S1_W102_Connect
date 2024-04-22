@@ -8,11 +8,10 @@ firebase-debug.log*
 firebase-debug.*.log*
 
 
-build/
-src/LocalStyle.css
 
 # Firebase cache
 .firebase/
+
 
 # Firebase config
 
