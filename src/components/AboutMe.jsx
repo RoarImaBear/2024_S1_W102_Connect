@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { collection } from "@firebase/firestore";
-import { useFetchRealtime } from "../support-functions/importFunctions";
+import { collection, doc } from "@firebase/firestore";
+import {
+  useFetchRealtime,
+  useFetchRealtimeDoc,
+} from "../support-functions/importFunctions";
 import { QuickEditField } from "./QuickEditField";
 
 export function AboutMe() {
@@ -10,6 +13,12 @@ export function AboutMe() {
   const [profileInfo, setProfileInfo] = useState({});
   const ref = collection(firestore, "accounts", location, userID);
   useFetchRealtime(ref, setProfileInfo);
+
+  const [profileDoc, setDoc] = useState();
+
+  const docRef = doc(firestore, "accounts/berlin/test-user/profile-picture");
+  useFetchRealtimeDoc(docRef, setDoc);
+  console.log(profileDoc);
 
   return (
     <div>
@@ -31,7 +40,7 @@ export function AboutMe() {
         <label>About you</label>
         <QuickEditField
           data={profileInfo[0]?.data}
-          fieldName={"age"}
+          fieldName={"about-you"}
           docRef={profileInfo[0]?.ref}
         />
       </form>

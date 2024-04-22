@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { collection, getDocs, onSnapshot } from "@firebase/firestore";
+import { getDocs, onSnapshot } from "@firebase/firestore";
 
 export const useFetchCollection = (collectionRef, setData) => {
   useEffect(() => {
@@ -33,14 +33,18 @@ export const useFetchRealtime = (ref, setData) => {
   }, []);
 };
 
-// export const useFetchRealtimeDoc = (ref, setData) => {
-//   useEffect(() => {
-//     const unsubscribe = onSnapshot(ref, (doc) => {
-//       if (doc.exists()) {
-//         const data = doc.data();
-//       }
-//     });
-//   });
-// };
+export const useFetchRealtimeDoc = (ref, setData) => {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(ref, (doc) => {
+      if (doc.exists) {
+        const fetchedData = doc.data();
+        setData(fetchedData);
+      } else {
+        setData("failed to load");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+};
 
 export default useFetchCollection;

@@ -5,10 +5,14 @@
 
 div {
   border: 1px solid black;
-  margin: 5px;
+  margin: 2px;
+  padding: 2px;
 }
 
 header {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
 }
 
 header ul {
@@ -27,4 +31,12 @@ header li:first-child {
 
 header li:last-child {
   margin-left: auto;
+}
+
+input {
+  border: none;
+}
+
+div #quick-edit {
+  min-height: 1rem;
 }

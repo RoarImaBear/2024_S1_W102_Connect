@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
-export function QuickEditField({ data, fieldName, docRef }) {
+export function QuickSwapImage({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [value, setValue] = useState(data);
   const isNumber = typeof data === "number" && Number.isFinite(data);
@@ -27,7 +27,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
   let field;
   if (editable) {
     field = (
-      <div id="quick-edit" onClick={() => setEditable(!editable)}>
+      <div onClick={() => setEditable(!editable)}>
         <input
           id="field"
           value={value}
@@ -39,8 +39,8 @@ export function QuickEditField({ data, fieldName, docRef }) {
     );
   } else {
     field = (
-      <div id="quick-edit" onClick={() => setEditable(!editable)}>
-        {data && data.hasOwnProperty(fieldName) ? data[fieldName] : "..."}
+      <div onClick={() => setEditable(!editable)}>
+        {data?.fieldName ? data?.fieldName : "..."}
       </div>
     );
   }
