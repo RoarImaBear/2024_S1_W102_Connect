@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { firestore } from "../firebase";
 import { collection, doc } from "@firebase/firestore";
 import {
-  useFetchRealtime,
+  useFetchRealtimeCollection,
   useFetchRealtimeDoc,
 } from "../support-functions/importFunctions";
 import { QuickEditField } from "./QuickEditField";
@@ -13,7 +13,7 @@ export function AboutMe() {
   const location = "berlin";
   const [profileInfo, setProfileInfo] = useState({});
   const ref = collection(firestore, "accounts", location, userID);
-  useFetchRealtime(ref, setProfileInfo);
+  useFetchRealtimeCollection(ref, setProfileInfo);
 
   const [profileDoc, setDoc] = useState();
 

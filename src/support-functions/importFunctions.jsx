@@ -20,7 +20,7 @@ export const useFetchCollection = (collectionRef, setData) => {
   }, []);
 };
 
-export const useFetchRealtime = (ref, setData) => {
+export const useFetchRealtimeCollection = (ref, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
       const fetchedData = [];
@@ -47,4 +47,4 @@ export const useFetchRealtimeDoc = (ref, setData) => {
   }, []);
 };
 
-export default useFetchCollection;
+export default useFetchRealtimeCollection;
