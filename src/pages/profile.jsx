@@ -1,53 +1,41 @@
-import React, {useRef} from 'react'
-import { firestore } from "../firebase"
-import { addDoc, collection} from "@firebase/firestore"
+import React, { useRef } from "react";
+import Header from "../components/AppHeader";
 
-export default function Home(){
+import { addDoc, deleteDoc } from "@firebase/firestore";
+import { AboutMe } from "../components/AboutMe";
 
+export default function Profile() {
+  return (
+    <>
+      <Header />
+      <div>
+        <section className="main-container">
+          <AboutMe />
+          {/* location */}
+          <div></div>
 
-    return(
-        <body>
-            <section className="main-container">
-                {/* name age gender and photo */}
-                <div> 
-                    <form action="">
-                    {/* <form onSubmit ={handleSave}> */}
-                    <label>Please Enter Name</label>
-                    {/* <input type ="text" ref={Name}/> */}
-                    <label>Please Enter Age</label>
-                    {/* <input type ="integer" ref={Name}/> */}
-                    <button type='submit'>Save</button>
-                    </form>
-                </div>
-                {/* location */}
-                <div>
+          {/* Description */}
+          <div>
+            <label>Please Enter a Description</label>
+            {/* <input type ="String" ref={Description}/> */}
+          </div>
 
-                </div>
+          {/* Interests */}
+          <div>
+            {/* Pick from interests list */}
+            <div>
+              <label htmlFor="interests">Pick your interests</label>
+              {/* pick your interests this will be dynamically polulated  */}
+              <select name="interests" id="interests">
+                <option value="interest1">interest1</option>
+              </select>
+            </div>
 
-                {/* Description */}
-                <div>
-                <label>Please Enter a Description</label>
-                    {/* <input type ="String" ref={Description}/> */}
-                </div>
-
-                {/* Interests */}
-                <div>
-                    {/* Pick from interests list */}
-                    <div>
-                    <label for ="interests">Pick your interests</label>
-                    {/* pick your interests this will be dynamically polulated  */}
-                    <select name="interests" id="interests">
-                        <option value ="interest1">interest1</option>
-                    </select>
-                    </div>
-
-                    {/* current interests  */}
-                    <div>
-
-                    </div>
-                </div>
-             
-            </section>
-        </body>
-    )
+            {/* current interests  */}
+            <div></div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
 }

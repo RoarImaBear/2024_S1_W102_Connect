@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  border: 1px solid black;
+  margin: 5px;
+}
+
+header {
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+header li {
+  padding: 2%;
+}
+
+header li:first-child {
+  margin-left: auto;
+}
+
+header li:last-child {
+  margin-left: auto;
+}
