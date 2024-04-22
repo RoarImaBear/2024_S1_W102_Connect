@@ -4,13 +4,11 @@ import { setDoc, updateDoc } from "@firebase/firestore";
 export function QuickEditField({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [value, setValue] = useState(data);
-  const isNumber = typeof data === "number" && Number.isFinite(data);
 
   const handleUpdateSubmit = async () => {
     setEditable(!editable);
     let newValue = document.getElementById("field").value;
 
-    if (isNumber) newValue = parseFloat(newValue);
     try {
       await updateDoc(docRef, { [fieldName]: newValue });
     } catch (error) {
@@ -32,7 +30,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
           id="field"
           value={value}
           onChange={handleChange}
-          onClick={(event) => event.stopPropagation()}
+          onClick={(event) => event.stopPropagation()} // to prevent click on input field from counting as click on thing
         />
         <button onClick={handleUpdateSubmit}>Submit</button>
       </div>

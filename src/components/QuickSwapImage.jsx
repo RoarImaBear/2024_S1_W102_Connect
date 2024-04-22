@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
 export function QuickSwapImage({ data, fieldName, docRef }) {
+  console.log("data", data);
+  console.log("docref", docRef);
   const [editable, setEditable] = useState(false);
-  const [value, setValue] = useState(data);
-  const isNumber = typeof data === "number" && Number.isFinite(data);
+  console.log("link", data);
 
-  const handleUpdateSubmit = async () => {
+  const [inputFieldValue, setInputValue] = useState(data?.link);
+
+  const handleSubmit = async () => {
     setEditable(!editable);
-    let newValue = document.getElementById("field").value;
+    let newValue = document.getElementById("input-field").value;
 
-    if (isNumber) newValue = parseFloat(newValue);
     try {
       await updateDoc(docRef, { [fieldName]: newValue });
     } catch (error) {
@@ -20,8 +22,10 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
     }
   };
 
+  fieldName = "link";
+
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setInputValue(event.target.value);
   };
 
   let field;
@@ -29,20 +33,24 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
     field = (
       <div onClick={() => setEditable(!editable)}>
         <input
-          id="field"
-          value={value}
+          id="input-field"
+          value={inputFieldValue}
           onChange={handleChange}
           onClick={(event) => event.stopPropagation()}
         />
-        <button onClick={handleUpdateSubmit}>Submit</button>
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     );
   } else {
     field = (
-      <div onClick={() => setEditable(!editable)}>
-        {data?.fieldName ? data?.fieldName : "..."}
-      </div>
+      <img
+        id="profile-picture"
+        src={data?.link}
+        alt="user's face... probably"
+        onClick={() => setEditable(!editable)}
+      />
     );
   }
+
   return field;
 }
