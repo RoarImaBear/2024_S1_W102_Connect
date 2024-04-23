@@ -15,37 +15,41 @@ export function AboutMe() {
   const ref = collection(firestore, "accounts", location, userID);
   useFetchRealtimeCollection(ref, setProfileInfo);
 
-  const [profileDoc, setDoc] = useState();
+  const [profileDoc, setDoc] = useState({});
 
-  const docRef = doc(firestore, "accounts/berlin/test-user/profile-picture");
+  const docRef = doc(firestore, "accounts/berlin/users/james");
   useFetchRealtimeDoc(docRef, setDoc);
+
+  console.log("entireDoc", profileDoc);
+  console.log("checkpoint", profileDoc?.profilePicture);
 
   return (
     <div>
       <QuickSwapImage
-        data={profileDoc}
-        docRef={doc(firestore, "accounts/berlin/test-user/profile-picture")}
+        data={profileDoc?.profilePicture}
+        fieldName={"profilePicture"}
+        docRef={doc(firestore, "accounts/berlin/users/test-user")}
       />
       <h5>Name</h5>
       <QuickEditField
         id="name-field"
-        data={profileInfo[0]?.data}
+        data={profileDoc?.name}
         fieldName={"name"}
-        docRef={profileInfo[0]?.ref}
+        docRef={docRef}
       />
       <br />
       <h5>Age</h5>
       <QuickEditField
-        data={profileInfo[0]?.data}
+        data={profileDoc?.age}
         fieldName={"age"}
-        docRef={profileInfo[0]?.ref}
+        docRef={docRef}
       />
       <br />
       <h5>About you</h5>
       <QuickEditField
-        data={profileInfo[0]?.data}
-        fieldName={"about-you"}
-        docRef={profileInfo[0]?.ref}
+        data={profileDoc?.about}
+        fieldName={"about"}
+        docRef={docRef}
       />
     </div>
   );

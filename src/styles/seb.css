@@ -9,6 +9,14 @@ div {
   padding: 2px;
 }
 
+div #profile-card {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
 header {
   border: 1px solid black;
   margin: 2px;
@@ -43,4 +51,3 @@ input {
 div #quick-edit {
   min-height: 1rem;
 }
-
