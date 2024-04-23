@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
 export function QuickSwapImage({ data, fieldName, docRef }) {
-  console.log("data", data);
-  console.log("docref", docRef);
   const [editable, setEditable] = useState(false);
-  console.log("link", data);
-
-  const [inputFieldValue, setInputValue] = useState(data?.link);
+  const [imageURL, setImageURL] = useState(data);
+  console.log("data", data);
 
   const handleSubmit = async () => {
-    setEditable(!editable);
-    let newValue = document.getElementById("input-field").value;
+    let newValue = imageURL;
+    // console.log("newValue", newValue);
 
     try {
       await updateDoc(docRef, { [fieldName]: newValue });
@@ -20,12 +17,11 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
         await setDoc(docRef, { [fieldName]: newValue });
       }
     }
+    setEditable(!editable);
   };
 
-  fieldName = "link";
-
   const handleChange = (event) => {
-    setInputValue(event.target.value);
+    setImageURL(event.target.value);
   };
 
   let field;
@@ -34,7 +30,7 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
       <div onClick={() => setEditable(!editable)}>
         <input
           id="input-field"
-          value={inputFieldValue}
+          value={imageURL}
           onChange={handleChange}
           onClick={(event) => event.stopPropagation()}
         />
@@ -45,7 +41,7 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
     field = (
       <img
         id="profile-picture"
-        src={data?.link}
+        src={data}
         alt="user's face... probably"
         onClick={() => setEditable(!editable)}
       />

@@ -3,11 +3,10 @@ import { setDoc, updateDoc } from "@firebase/firestore";
 
 export function QuickEditField({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
-  const [value, setValue] = useState(data);
+  const [inputValue, setInputValue] = useState(data);
 
   const handleUpdateSubmit = async () => {
-    setEditable(!editable);
-    let newValue = document.getElementById("field").value;
+    let newValue = inputValue;
 
     try {
       await updateDoc(docRef, { [fieldName]: newValue });
@@ -16,10 +15,11 @@ export function QuickEditField({ data, fieldName, docRef }) {
         await setDoc(docRef, { [fieldName]: newValue });
       }
     }
+    setEditable(!editable);
   };
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setInputValue(event.target.value);
   };
 
   let field;
@@ -28,7 +28,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
       <div id="quick-edit" onClick={() => setEditable(!editable)}>
         <input
           id="field"
-          value={value}
+          value={inputValue}
           onChange={handleChange}
           onClick={(event) => event.stopPropagation()} // to prevent click on input field from counting as click on thing
         />
@@ -38,7 +38,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
   } else {
     field = (
       <div id="quick-edit" onClick={() => setEditable(!editable)}>
-        {data && data.hasOwnProperty(fieldName) ? data[fieldName] : "..."}
+        {data ? data : "..."}
       </div>
     );
   }
