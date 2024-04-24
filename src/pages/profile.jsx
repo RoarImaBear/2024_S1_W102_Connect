@@ -3,7 +3,7 @@ import Header from "../components/AppHeader";
 
 import { addDoc, deleteDoc } from "@firebase/firestore";
 import { AboutMe } from "../components/AboutMe";
-import {InterestSelect} from "../components/InterestSelect";
+import { InterestSelect } from "../components/InterestSelect";
 
 export default function Profile() {
   return (
@@ -36,7 +36,7 @@ export default function Profile() {
             </div>
 
             {/* current interests  */}
-            <div> </div>
+            <div></div>
           </div>
         </section>
       </div>

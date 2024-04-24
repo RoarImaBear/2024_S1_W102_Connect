@@ -9,26 +9,22 @@ import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
 export function AboutMe() {
-  const userID = "test-user";
+  const userID = "sean";
   const location = "berlin";
-  const [profileInfo, setProfileInfo] = useState({});
-  const ref = collection(firestore, "accounts", location, userID);
-  useFetchRealtimeCollection(ref, setProfileInfo);
 
   const [profileDoc, setDoc] = useState({});
 
-  const docRef = doc(firestore, "accounts/berlin/users/james");
+  const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
   useFetchRealtimeDoc(docRef, setDoc);
 
   console.log("entireDoc", profileDoc);
-  console.log("checkpoint", profileDoc?.profilePicture);
 
   return (
     <div>
       <QuickSwapImage
         data={profileDoc?.profilePicture}
         fieldName={"profilePicture"}
-        docRef={doc(firestore, "accounts/berlin/users/test-user")}
+        docRef={docRef}
       />
       <h5>Name</h5>
       <QuickEditField
