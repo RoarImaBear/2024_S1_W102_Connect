@@ -8,12 +8,10 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-export function AboutMe() {
-  const userID = "test-user";
+export function Interests() {
+  const userID = "TestUser1";
   const location = "berlin";
-  const [profileInfo, setProfileInfo] = useState({});
-  const ref = collection(firestore, "accounts", location, userID);
-  useFetchRealtimeCollection(ref, setProfileInfo);
+  const usersRef = collection(firestore, `accounts/${location}/users/${userID}`);
 
   const [profileDoc, setDoc] = useState({});
 
@@ -21,7 +19,6 @@ export function AboutMe() {
   useFetchRealtimeDoc(docRef, setDoc);
 
   console.log("entireDoc", profileDoc);
-  console.log("checkpoint", profileDoc?.profilePicture);
 
   return (
     <div>
