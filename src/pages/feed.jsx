@@ -11,41 +11,55 @@ import {
 
 export default function Feed() {
   function ProfileCard() {
-    const userID = "test-user";
+    const userID = "james";
     const location = "berlin";
 
-    const [profileSelection, setProfiles] = useState({});
+    const [profileDoc, setDoc] = useState({});
 
-    // const ref = collection(firestore, "accounts", location);
-    // useFetchRealtimeCollection(ref, setProfiles);
-
-    const ref = doc(firestore, "accounts", location);
-    useFetchRealtimeDoc(ref, setProfiles);
-    console.log(profileSelection)
+    const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
+    useFetchRealtimeDoc(docRef, setDoc);
+    console.log(profileDoc);
 
     return (
-      <div id="profile-card">
-        <h1>Profile</h1>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
+      <>
+        <div id="profile-card">
+          <h1>{profileDoc?.name}</h1>
+          <img id="profile-picture" src={profileDoc?.profilePicture} alt="" />
+          <h4>{profileDoc?.age}</h4>
+          <p>{profileDoc?.about}</p>
+          <br />
+          <AddButton />
+        </div>
+      </>
+    );
+  }
+
+  function BigButton() {
+    return (
+      <button id="big-button">
+        <h1>Next</h1>
+      </button>
+    );
+  }
+
+  function AddButton() {
+    return (
+      <button>
+        <h3>Connect!</h3>
+      </button>
     );
   }
 
   return (
     <>
       <Header />
-      <div>
-        <section className="main-container">
+      <section className="main-container">
+        <div id="feed-card">
+          <BigButton />
           <ProfileCard />
-        </section>
-      </div>
+          <BigButton />
+        </div>
+      </section>
     </>
   );
 }

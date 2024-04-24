@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { collection, doc } from "@firebase/firestore";
-import {
-  useFetchRealtimeCollection,
-  useFetchRealtimeDoc,
-} from "../support-functions/importFunctions";
+import { doc } from "@firebase/firestore";
+import { useFetchRealtimeDoc } from "../support-functions/importFunctions";
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
