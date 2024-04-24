@@ -11,6 +11,7 @@ export default function Profile() {
       <div>
         <section className="main-container">
           <AboutMe />
+
           {/* location */}
           <div></div>
 

@@ -47,6 +47,8 @@ export const useFetchRealtimeDoc = (ref, setData) => {
   }, []);
 };
 
+
+
 export const useFetchNestedCollection = (docRef, collectionName, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(docRef, (doc) => {
