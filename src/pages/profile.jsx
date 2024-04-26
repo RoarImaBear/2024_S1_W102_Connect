@@ -16,26 +16,36 @@ export default function Profile() {
           <Location />
 
           {/* location */}
-          <div></div>
+          <div> 
 
-          {/* Description */}
+          </div>
+
+          {/* The form */}
           <div>
+            {
+            <form action = "profile.jsx" method = "post">
+            <label>Pick your location</label>
+            <select name="location" id="location">
+              <option value="location1">location1</option>
+              <option value="location2">location2</option>
+              </select>
             <label>Please Enter a Description</label>
-            {/* <input type ="String" ref={Description}/> */}
+            <input type ="String" ref={Description}/>
+            
+            <label htmlFor ="interests">Pick your interests</label>
+            <select name="interests" id="interests">
+              <option value="interest1">interest1</option>
+              </select>
+
+            <input type="submit" value="Submit"/>
+            </form>
+            }
           </div>
 
           {/* Interests */}
           <div>
-            {/* Pick from interests list */}
-            <div>
-              <label htmlFor="interests">Pick your interests</label>
-              {/* pick your interests this will be dynamically polulated  */}
-              <select name="interests" id="interests">
-                <option value="interest1">interest1</option>
-              </select>
-            </div>
 
-            {/* current interests  */}
+            
             <div></div>
           </div>
         </section>

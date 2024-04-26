@@ -14,21 +14,51 @@ export function Interests(userID, location) {
   const [profileDoc, setDoc] = useState({});
 
   const docRef = doc(firestore, "accounts/berlin/users/james");
+  const interestsRef = collection(firestore, 'keys/interests-key');
+
   useFetchRealtimeDoc(docRef, setDoc);
 
   console.log("entireDoc", profileDoc);
 
-  return (
-    <div>
- 
-      <h5>Interests</h5>
-      <QuickEditField
-        id="name-field" 
-        data={profileDoc?.interests} //the question mark stops null pointer error.
+  const InterestsList = ({interestsRef}) => {
+    return (
+      <div>
+          {interestsRef.interests.map((interest,index) => (
+            <InterestCard key={index} interest={interest} />
+          ))}
+      </div>
+    );
+  }
+
+  const InterestCard = ({interest}) => {
+    const handleDelete = async () => {
+      try{
+        await deleteDoc(interestsRef, {interest});
+        console.log("Document successfully deleted!",interestsRef,interest);
+      }
+      catch(error){
+        console.error("Error removing document: ", error);
+      }
+    };
+    return 
+    (
+      <div>
+        <h5>Interests</h5>
+        <QuickEditField
+        data={interest?.data?.interests} //the question mark stops null pointer error.
         fieldName={"interests"}
         docRef={docRef}
       />
       <br />
+      </div>
+    );
+  }
+
+
+  return (
+    <div>
+ 
+      
     </div>
   );
 }
