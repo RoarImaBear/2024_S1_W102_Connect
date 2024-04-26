@@ -8,9 +8,7 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-export function Interests() {
-  const userID = "TestUser1";
-  const location = "berlin";
+export function Interests(userID, location) {
   const usersRef = collection(firestore, `accounts/${location}/users/${userID}`);
 
   const [profileDoc, setDoc] = useState({});
