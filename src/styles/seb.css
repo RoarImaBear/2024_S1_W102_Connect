@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
+}
+
+div #profile-card {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+header li {
+  padding: 2%;
+}
+
+header li:first-child {
+  margin-left: auto;
+}
+
+header li:last-child {
+  margin-left: auto;
+}
+
+#profile-picture {
+  width: 140px;
+}
+
+input {
+}
+
+div #quick-edit {
+  min-height: 1rem;
+}
