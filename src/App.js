@@ -1,9 +1,8 @@
-import React from 'react';
 import React, { useState, useEffect } from "react";
 import Home from "./pages/home";
-import SignUpForm from './pages/SignUpForm';
-import LoginForm from './pages/LoginForm';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import SignUpForm from "./pages/SignUpForm";
+import LoginForm from "./pages/LoginForm";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
 
@@ -19,10 +18,6 @@ function App() {
         <Route path="/feed" element={<Feed />} />
       </Routes>
     </BrowserRouter>
-    <div className="App">
-      <Profile />
-      {/* <Feed /> */}
-    </div>
   );
 }
 
