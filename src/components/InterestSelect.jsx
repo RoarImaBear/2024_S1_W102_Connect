@@ -40,7 +40,7 @@ export function Interests(userID, location) {
         console.error("Error removing document: ", error);
       }
     };
-    return 
+    return
     (
       <div>
         <h5>Interests</h5>
