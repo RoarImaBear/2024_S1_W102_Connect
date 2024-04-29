@@ -1,20 +1,21 @@
 import "../styles/seb.css";
+import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
     <header>
       <ul>
         <li>
-          <a href="/">Feed</a>
+          <Link to="/feed">Feed</Link>
         </li>
         <li>
-          <a href="/">Home</a>
+        <Link to="/home">Home</Link>
         </li>
         <li>
-          <a href="/">Matches</a>
+          <Link to="/matches">Matches</Link>
         </li>
         <li>
-          <a href="/">Profile</a>
+          <Link to="/profile">Profile</Link>
         </li>
       </ul>
     </header>
