@@ -52,6 +52,7 @@ import { QuickSwapImage } from "./QuickSwapImage";
         data={interest?.data?.interests} //the question mark stops null pointer error.
         fieldName={"interests"}
         docRef={docRef}
+        
       />
       <br />
       </div>
