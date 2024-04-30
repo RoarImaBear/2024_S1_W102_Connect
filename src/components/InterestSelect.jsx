@@ -8,7 +8,8 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-export function Interests(userID, location) {
+  export function Interests(userID, location) 
+  {
   const usersRef = collection(firestore, `accounts/${location}/users/${userID}`);
 
   const [profileDoc, setDoc] = useState({});
@@ -21,7 +22,8 @@ export function Interests(userID, location) {
   console.log("entireDoc", profileDoc);
 
   const InterestsList = ({interestsRef}) => {
-    return (
+    return 
+    (
       <div>
           {interestsRef.interests.map((interest,index) => (
             <InterestCard key={index} interest={interest} />
@@ -32,11 +34,13 @@ export function Interests(userID, location) {
 
   const InterestCard = ({interest}) => {
     const handleDelete = async () => {
-      try{
+      try
+      {
         await deleteDoc(interestsRef, {interest});
         console.log("Document successfully deleted!",interestsRef,interest);
       }
-      catch(error){
+      catch(error)
+      {
         console.error("Error removing document: ", error);
       }
     };
@@ -57,7 +61,7 @@ export function Interests(userID, location) {
 
   return (
     <div>
- 
+      <InterestsList interestsRef={interestsRef}/>
       
     </div>
   );
