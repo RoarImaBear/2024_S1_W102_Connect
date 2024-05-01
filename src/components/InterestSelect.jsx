@@ -8,19 +8,19 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-  function ListofInterests(interestsRef)
+  function LoadInterests(interestsRef, ListofInterests)
   {
-    const doc = interestsRef.get();
-    if (!doc.exists) {
-      console.log('No such document!')
-    } else 
+    return
     {
-      let i = 0;
-      doc.data().interests.forEach((interest) => 
+    const doc = interestsRef.once('value').then((datasnapshot => {
+      console.log("Fetching interests");
+      if(!datasnapshot.exists())
       {
-        ListofInterests[i]=interest;
-        i++;
-      });
+        return{};
+      }
+      ListofInterests = datasnapshot.val();
+      return ListofInterests;
+    }));
     }
   }
 
@@ -38,9 +38,8 @@ import { QuickSwapImage } from "./QuickSwapImage";
   useFetchRealtimeDoc(docRef, setDoc);
 
   console.log("entireDoc", profileDoc);
-
-  ListofInterests();
-
+   let interests = [];
+   interests=LoadInterests(interestsRef, interests);
   /*interests: [
     {
       id: 1,
@@ -62,49 +61,102 @@ import { QuickSwapImage } from "./QuickSwapImage";
 
 
 
-  const InterestsList = ({interestsRef}) => {
-    return 
-    (
+  const SelectInterestList = ({Interests}) => {
       <div>
-          {interestsRef.interests.map((interest,index) => (
-            <InterestCard key={index} interest={interest} />
-          ))}
+        {interests.map((interest) => (
+          <label key={interest.id}>
+            <input
+              type="checkbox"
+              value={interest.interest}
+              checked={selectedInterests.includes(interest.interest)}
+              onChange={(event) => handleCheckboxChange(event)}
+            />
+            {interest.interest}
+          </label>
+        ))}
+          {
+            interests.map((interests) => (
+              <label key={interests.id}>
+                <input type="checkbox" value={interests.interest} />
+                {interests.interest}
+                {/* <InterestCard interest={interest} /> */}
+                </label>
+            ))
+            const [selectedInterests, setSelectedInterests] = useState([]);
+            const handleCheckboxChange = ((event) => {
+            const checkedInterest = event.target.value;
+            if(event.target.checked){
+            setSelectedInterests([...selectedInterests,checkedInterest])
+            }else {
+            setSelectedInterests(selectedInterests.filter(id=>id !== checkedInterest))
+            }
+          <input type="Checkbox" 
+          value={interests.interest} 
+          checked={selectedInterests.includes(interests.interest)}
+          onChange={(event) => handleCheckboxChange(event)}/>
+          });
+          }
       </div>
-    );
   }
 
-  const InterestCard = ({interest}) => {
-    const handleDelete = async () => {
-      try
-      {
-        await deleteDoc(interestsRef, {interest});
-        console.log("Document successfully deleted!",interestsRef,interest);
-      }
-      catch(error)
-      {
-        console.error("Error removing document: ", error);
-      }
-    };
-    return
-    (
-      <div>
-       //refer to interestlist function 
+  // function ManageState(){
 
-        <h5>Interests</h5>
-        <QuickEditField
-        data={interest?.data?.interests} //the question mark stops null pointer error.
-        fieldName={"interests"}
-        docRef={docRef}
-      />
-      <br />
+  //   const [selectedInterests, setSelectedInterests] = useState([]);
+  //   const handleCheckboxChange = ((event) => {
+  //   const checkedInterest = event.target.value;
+  //   if(event.target.checked){
+  //     setSelectedInterests([...selectedInterests,checkedInterest])
+  //   }else{
+  //    setSelectedInterests(selectedInterests.filter(id=>id !== checkedInterest))
+  //     }
+  //     <input type="Checkbox" 
+  //       value={interests.interest} 
+  //       checked={selectedInterests.includes(interests.interest)}
+  //       onChange={(event) => handleCheckboxChange(event)}/>
+  //   });
+  // } 
+
+  const UserInteraction = (selectedInterests,) => {
+    return(
+      <div>
+        
       </div>
     );
+
   }
+
+  // const InterestCard = ({interest}) => {
+  //   const handleDelete = async () => {
+  //     try
+  //     {
+  //       await deleteDoc(interestsRef, {interest});
+  //       console.log("Document successfully deleted!",interestsRef,interest);
+  //     }
+  //     catch(error)
+  //     {
+  //       console.error("Error removing document: ", error);
+  //     }
+  //   };
+  //   return
+  //   (
+  //     <div>
+  //      //refer to interestlist function 
+
+  //       <h5>Interests</h5>
+  //       <QuickEditField
+  //       data={interest?.data?.interests} //the question mark stops null pointer error.
+  //       fieldName={"interests"}
+  //       docRef={docRef}
+  //     />
+  //     <br />
+  //     </div>
+  //   );
+  // }
 
 
   return (
     <div>
-      <InterestsList interestsRef={interestsRef}/>
+      <SekectInterestsList interestsRef={interestsRef}/>
 
     </div>
   );
