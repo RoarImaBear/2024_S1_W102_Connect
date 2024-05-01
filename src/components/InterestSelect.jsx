@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { collection, doc, deleteDoc } from "@firebase/firestore";
+import { collection, doc, deleteDoc, updateDoc,setDoc } from "@firebase/firestore";
 import {
   useFetchRealtimeCollection,
   useFetchRealtimeDoc,
@@ -8,20 +8,38 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-  export function InterestSelect(userID, location,name) 
+  function ListofInterests(interestsRef)
   {
-  const usersRef = collection(firestore, `accounts/${location}/users/${userID}/${name}`);
+    const doc = interestsRef.get();
+    if (!doc.exists) {
+      console.log('No such document!')
+    } else 
+    {
+      let i = 0;
+      doc.data().interests.forEach((interest) => 
+      {
+        ListofInterests[i]=interest;
+        i++;
+      });
+    }
+  }
 
+  export function InterestSelect(userID, location) 
+  {
+  //collection("accounts").document("${location}").collection("users").document("${userID}");
+ // const usersRef = document(firestore, 'accounts/berlin/users/james');
+  const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
+  
   const [profileDoc, setDoc] = useState({});
 
-  const docRef = doc(firestore, "accounts/berlin/users/james");
-  const interestsRef = collection(firestore, 'keys/interests-key');
+  //const docRef = doc(firestore, "accounts/berlin/users/james");
+  const interestsRef = collection(firestore, `keys/interests-key/interests`);
 
   useFetchRealtimeDoc(docRef, setDoc);
 
   console.log("entireDoc", profileDoc);
 
-
+  ListofInterests();
 
   /*interests: [
     {
@@ -70,12 +88,13 @@ import { QuickSwapImage } from "./QuickSwapImage";
     return
     (
       <div>
+       //refer to interestlist function 
+
         <h5>Interests</h5>
         <QuickEditField
         data={interest?.data?.interests} //the question mark stops null pointer error.
         fieldName={"interests"}
         docRef={docRef}
-
       />
       <br />
       </div>
