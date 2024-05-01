@@ -8,7 +8,7 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-  export function Interests(userID, location) 
+  export function InterestSelect(userID, location) 
   {
   const usersRef = collection(firestore, `accounts/${location}/users/${userID}`);
 
