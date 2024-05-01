@@ -21,6 +21,33 @@ import { QuickSwapImage } from "./QuickSwapImage";
 
   console.log("entireDoc", profileDoc);
 
+
+
+  interests: [
+    {
+      id: 1,
+      interest: "Music",
+      image: "https://source.unsplash.com/200x200/?music",
+    },
+    {
+      id: 2,
+      interest: "Art",
+      image: "https://source.unsplash.com/200x200/?art",
+    },
+    {
+      id: 3,
+      interest: "Sports",
+      image: "https://source.unsplash.com/200x200/?sports",
+    },
+    {
+      id: 4,
+      interest: "Food",
+      image: "https://source.unsplash.com/200x200/?food",
+    }
+  ];
+
+
+
   const InterestsList = ({interestsRef}) => {
     return 
     (
@@ -52,7 +79,7 @@ import { QuickSwapImage } from "./QuickSwapImage";
         data={interest?.data?.interests} //the question mark stops null pointer error.
         fieldName={"interests"}
         docRef={docRef}
-        
+
       />
       <br />
       </div>
@@ -63,7 +90,7 @@ import { QuickSwapImage } from "./QuickSwapImage";
   return (
     <div>
       <InterestsList interestsRef={interestsRef}/>
-      
+
     </div>
   );
 }
