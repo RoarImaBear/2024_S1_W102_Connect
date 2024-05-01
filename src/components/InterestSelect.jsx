@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import { collection, doc } from "@firebase/firestore";
+import { collection, doc, deleteDoc } from "@firebase/firestore";
 import {
   useFetchRealtimeCollection,
   useFetchRealtimeDoc,
@@ -8,9 +8,9 @@ import {
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
-  export function InterestSelect(userID, location) 
+  export function InterestSelect(userID, location,name) 
   {
-  const usersRef = collection(firestore, `accounts/${location}/users/${userID}`);
+  const usersRef = collection(firestore, `accounts/${location}/users/${userID}/${name}`);
 
   const [profileDoc, setDoc] = useState({});
 
@@ -23,28 +23,24 @@ import { QuickSwapImage } from "./QuickSwapImage";
 
 
 
-  interests: [
+  /*interests: [
     {
       id: 1,
-      interest: "Music",
-      image: "https://source.unsplash.com/200x200/?music",
+      interest: "Music"
     },
     {
       id: 2,
-      interest: "Art",
-      image: "https://source.unsplash.com/200x200/?art",
+      interest: "Art"
     },
     {
       id: 3,
-      interest: "Sports",
-      image: "https://source.unsplash.com/200x200/?sports",
+      interest: "Sports"
     },
     {
       id: 4,
-      interest: "Food",
-      image: "https://source.unsplash.com/200x200/?food",
+      interest: "Food"
     }
-  ];
+  ];*/
 
 
 
