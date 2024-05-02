@@ -83,18 +83,19 @@ import { QuickSwapImage } from "./QuickSwapImage";
                 </label>
             ))
             const [selectedInterests, setSelectedInterests] = useState([]);
-            const handleCheckboxChange = ((event) => {
+            const handleCheckboxChange = ((event) => 
+            {
             const checkedInterest = event.target.value;
             if(event.target.checked){
             setSelectedInterests([...selectedInterests,checkedInterest])
             }else {
             setSelectedInterests(selectedInterests.filter(id=>id !== checkedInterest))
             }
+          });
           <input type="Checkbox" 
           value={interests.interest} 
           checked={selectedInterests.includes(interests.interest)}
           onChange={(event) => handleCheckboxChange(event)}/>
-          });
           }
       </div>
   }
