@@ -5,6 +5,7 @@ import LoginForm from "./pages/LoginForm";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
+import Matches from "./pages/Matches";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/feed" element={<Feed />} />
+        <Route path="/matches" element={<Matches />} />
       </Routes>
     </BrowserRouter>
   );
