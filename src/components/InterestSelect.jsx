@@ -35,8 +35,6 @@ import { QuickSwapImage } from "./QuickSwapImage";
   //const docRef = doc(firestore, "accounts/berlin/users/james");
   const interestsRef = collection(firestore, `keys/interests-key/interests`);
 
-  useFetchRealtimeDoc(docRef, setDoc);
-
   console.log("entireDoc", profileDoc);
    let interests = [];
    interests=LoadInterests(interestsRef, interests);
@@ -59,45 +57,48 @@ import { QuickSwapImage } from "./QuickSwapImage";
     }
   ];*/
 
+  const InterestCheckbox = ({interest}) => {
+
+    return(
+
+    <label key={interest.id}>
+    <input
+      type="checkbox"
+      value={interest.interest}
+      checked={selectedInterests.includes(interest.interest)}
+      onChange={(event) => handleCheckboxChange(event)}
+    />
+    {interest.interest}
+    </label>);
+  }
+
+  const handleCheckboxChange = ((event) => {
+    const checkedInterest = event.target.value;
+    if(event.target.checked)
+    {
+      setSelectedInterest([...selectedInterests,checkedInterest])
+    }
+    else
+    {
+      setSelectedInterest(selectedInterests.filter(id=>id !== checkedInterest))
+    }
+  });
 
 
-  const SelectInterestList = ({Interests}) => {
+  const SelectInterestList = ({interests, selectedInterests, setSelectedInterests}) => {
+
+    
+
+    return
+    (
       <div>
-        {interests.map((interest) => (
-          <label key={interest.id}>
-            <input
-              type="checkbox"
-              value={interest.interest}
-              checked={selectedInterests.includes(interest.interest)}
-              onChange={(event) => handleCheckboxChange(event)}
-            />
-            {interest.interest}
-          </label>
-        ))}
-          {
-            interests.map((interests) => (
-              <label key={interests.id}>
-                <input type="checkbox" value={interests.interest} />
-                {interests.interest}
-                {/* <InterestCard interest={interest} /> */}
-                </label>
-            ))
-            const [selectedInterests, setSelectedInterests] = useState([]);
-            const handleCheckboxChange = ((event) => 
-            {
-            const checkedInterest = event.target.value;
-            if(event.target.checked){
-            setSelectedInterests([...selectedInterests,checkedInterest])
-            }else {
-            setSelectedInterests(selectedInterests.filter(id=>id !== checkedInterest))
-            }
-          });
-          <input type="Checkbox" 
-          value={interests.interest} 
-          checked={selectedInterests.includes(interests.interest)}
-          onChange={(event) => handleCheckboxChange(event)}/>
-          }
+          {interests.map((interest)=>(
+            <InterestCheckbox interest={interest} />
+          )
+        )}
+          
       </div>
+    )
   }
 
   // function ManageState(){
@@ -157,8 +158,34 @@ import { QuickSwapImage } from "./QuickSwapImage";
 
   return (
     <div>
-      <SekectInterestsList interestsRef={interestsRef}/>
+      const [selectedInterests, setSelectedInterests] = useState([]);
+      <SelectInterestList interestsRef={interestsRef}/>
 
     </div>
   );
-}
+
+
+//               interests.map((interests) => (
+//                <label key={interests.id}>
+//                  <input type="checkbox" value={interests.interest} />
+//                  {interests.interest}
+//                  {/* <InterestCard interest={interest} /> */}
+//                   </label>
+//               ))
+            
+
+//              const handleCheckboxChange = ((event) => 
+//              {
+//              const checkedInterest = event.target.value;
+//              if(event.target.checked){
+//              setSelectedInterests([...selectedInterests,checkedInterest])
+//              }else {
+//              setSelectedInterests(selectedInterests.filter(id=>id !== checkedInterest))
+//              }
+//            });
+
+//            <input type="Checkbox" 
+//            value={interests.interest} 
+//            checked={selectedInterests.includes(interests.interest)}
+//            onChange={(event) => handleCheckboxChange(event)}/>
+  }
