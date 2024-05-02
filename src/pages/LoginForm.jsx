@@ -47,7 +47,7 @@ const LoginForm = () => {
             // Login Account
             await login(email, password)
             setSuccessMessage('Login successful.');
-            navigate('/feed');
+            navigate('/profile');
         } catch(err) {
             if (err.code === 'auth/invalid-credential') {
                 // Invalid credential

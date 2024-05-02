@@ -49,7 +49,7 @@ const SignUpForm = () => {
       await signup(email, password);
       setSuccessMessage("Account created successfully.");
       // Take user to another page
-      navigate("/feed");
+      navigate("/profile");
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         // If account already exists
