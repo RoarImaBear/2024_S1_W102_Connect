@@ -14,7 +14,7 @@ export default function Feed() {
     const { currentUser } = useAuth();
     const userID = currentUser.uid;
     console.log(userID);
-    const location = "berlin";    
+    const location = "berlin";
 
     const [profileSelection, setProfiles] = useState({});
 
@@ -23,7 +23,7 @@ export default function Feed() {
 
     const ref = doc(firestore, "accounts", location);
     useFetchRealtimeDoc(ref, setProfiles);
-    console.log(profileSelection)
+    console.log(profileSelection);
 
     return (
       <div id="profile-card">
