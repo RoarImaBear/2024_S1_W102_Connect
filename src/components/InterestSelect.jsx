@@ -105,7 +105,6 @@ import { QuickSwapImage } from "./QuickSwapImage";
             <InterestCheckbox interest={interest} />
           )
         )}
-          
       </div>
     )
   }
