@@ -13,6 +13,7 @@ export default function Profile() {
         <section className="main-container">
           <AboutMe />
           <InterestSelect />
+          
         </section>
       </div>
     </>
