@@ -4,11 +4,9 @@ import { setDoc, updateDoc } from "@firebase/firestore";
 export function QuickSwapImage({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [imageURL, setImageURL] = useState(data);
-  console.log("data", data);
 
   const handleSubmit = async () => {
     let newValue = imageURL;
-    // console.log("newValue", newValue);
 
     try {
       await updateDoc(docRef, { [fieldName]: newValue });

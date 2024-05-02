@@ -10,11 +10,26 @@ div {
 }
 
 div #profile-card {
-  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+div #feed-card {
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: center;
+  width: 50vw;
+}
+
+#big-button {
+  flex: 1;
 }
 
 header {

@@ -1,6 +1,6 @@
 {
-  "short_name": "CloseWeUI",
-  "name": "The front-end UI for CloseWe",
+  "short_name": "Connect",
+  "name": "The front-end for Conenct App, a projcet for COMP602",
   "icons": [
     {
       "src": "favicon.ico",
