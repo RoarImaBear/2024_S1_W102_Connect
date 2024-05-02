@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Header from "../components/AppHeader";
-
+import { useAuth } from "../contexts/AuthContext";
 import { firestore } from "../firebase";
 import { collection, doc } from "@firebase/firestore";
 
@@ -11,8 +11,10 @@ import {
 
 export default function Feed() {
   function ProfileCard() {
-    const userID = "test-user";
-    const location = "berlin";
+    const { currentUser } = useAuth();
+    const userID = currentUser.uid;
+    console.log(userID);
+    const location = "berlin";    
 
     const [profileSelection, setProfiles] = useState({});
 
