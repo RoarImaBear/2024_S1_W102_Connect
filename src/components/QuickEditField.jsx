@@ -12,7 +12,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
       await updateDoc(docRef, { [fieldName]: newValue });
     } catch (error) {
       if (error.code === "not-found") {
-       await setDoc(docRef, { [fieldName]: newValue }); //error here
+        await setDoc(docRef, { [fieldName]: newValue }); //error here
       }
     }
     setEditable(!editable);

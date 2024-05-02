@@ -28,34 +28,14 @@ function LoadInterests(interestsRef, ListofInterests) {
   }
 }
 
-const InterestCheckbox = ({
-  interest,
-  selectedInterests,
-  setSelectedInterest,
-}) => {
+function InterestCheckbox({ interest }) {
+  console.log(interest);
   return (
-    <label key={interest.id}>
-      <input
-        type="checkbox"
-        value={interest.interest}
-        checked={selectedInterests.includes(interest.interest)}
-        onChange={(event) => handleCheckboxChange(event)}
-      />
-      {interest.interest}
-    </label>
+    <div>
+      <p>{interest}</p>
+    </div>
   );
-
-  <input
-    type="checkbox"
-    onChange={(event) => {
-      handleMultipleCheckboxChange(event);
-    }}
-  />;
-  const handleMultipleCheckboxChange = (event) => {
-    const InterestsArray = interests.map((i) => i.interest);
-    setSelectedInterest(event.target.checked ? InterestsArray : []);
-  };
-};
+}
 
 const handleCheckboxChange = (
   event,
@@ -87,27 +67,39 @@ const UserInteraction = (selectedInterests) => {
   return <div></div>;
 };
 
-export function InterestSelect(userID, location) {
-  //collection("accounts").document("${location}").collection("users").document("${userID}");
-  // const usersRef = document(firestore, 'accounts/berlin/users/james');
+export function InterestSelect() {
+  const userID = "test-user";
+  const location = "berlin";
+
+  const [interestsKeyArray, setInterestsArray] = useState([]);
+  const interestsKeyRef = doc(firestore, `keys/interests-key`);
+
   const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
 
   const [profileDoc, setDoc] = useState({});
 
+  useFetchRealtimeDoc(interestsKeyRef, setInterestsArray);
+  console.log("interstsKey", interestsKeyArray?.interests);
+
   //const docRef = doc(firestore, "accounts/berlin/users/james");
-  const interestsRef = collection(firestore, `keys/interests-key/interests`);
 
   console.log("entireDoc", profileDoc);
   let interests = [];
-  interests = LoadInterests(interestsRef, interests);
+  //interests = LoadInterests(interestsRef, interests);
 
   return (
     <div>
-      <SelectInterestList interestsRef={interestsRef} />
+      {interestsKeyArray?.interests?.map((interest, index) => (
+        <InterestCheckbox key={index} interest={interest} />
+      ))}
     </div>
   );
 }
 
+//collection("accounts").document("${location}").collection("users").document("${userID}");
+// const usersRef = document(firestore, 'accounts/berlin/users/james');
+
+// <SelectInterestList interestsRef={interestsRef} />}
 
 // function ManageState(){
 
