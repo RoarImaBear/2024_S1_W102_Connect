@@ -6,15 +6,13 @@ import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 
 export function AboutMe() {
-  const userID = "sean";
+  const userID = "test-user";
   const location = "berlin";
 
   const [profileDoc, setDoc] = useState({});
 
   const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
   useFetchRealtimeDoc(docRef, setDoc);
-
-  console.log("entireDoc", profileDoc);
 
   return (
     <div>

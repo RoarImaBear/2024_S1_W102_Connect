@@ -9,7 +9,6 @@ export const useFetchCollection = (collectionRef, setData) => {
         const fetchedData = [];
         querySnapshot.forEach((doc) => {
           fetchedData.push({ id: doc.id, ref: doc.ref, data: doc.data() });
-          console.log(doc.id, " : ", doc.data());
         });
         setData(fetchedData);
       } catch (error) {
@@ -20,6 +19,13 @@ export const useFetchCollection = (collectionRef, setData) => {
   }, []);
 };
 
+// try {
+//   await updateDoc(docRef, { [fieldName]: newValue });
+// } catch (error) {
+//   if (error.code === "not-found") {
+//     await setDoc(docRef, { [fieldName]: newValue });
+//   }
+// }
 export const useFetchRealtimeCollection = (ref, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
@@ -40,15 +46,14 @@ export const useFetchRealtimeDoc = (ref, setData) => {
         const fetchedData = doc.data();
         setData(fetchedData);
       } else {
-        setData("failed to load");
+        console.log("failed to load doc");
       }
     });
     return () => unsubscribe();
   }, []);
 };
 
-
-
+// Not usable in current state.
 export const useFetchNestedCollection = (docRef, collectionName, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(docRef, (doc) => {
@@ -67,3 +72,25 @@ export const useFetchNestedCollection = (docRef, collectionName, setData) => {
 };
 
 export default useFetchRealtimeCollection;
+
+// const [contacts, setContacts] = useState({});
+
+// useFetchRealtimeDoc (
+//   doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
+//   setContacts
+// );
+
+// const [contact, setContact] = useState({});
+// useEffect(() => {
+//   if (contacts && contacts[userID]) {
+//     const unsubscribe = onSnapshot(contacts["sean"], (doc) => {
+//       if (doc.exists) {
+//         const fetchedData = doc.data();
+//         setContact(fetchedData);
+//       } else {
+//         console.log("failed to load doc");
+//       }
+//     });
+//     return () => unsubscribe();
+//   }
+// }, [contacts]);
