@@ -5,9 +5,12 @@ import { useFetchRealtimeDoc } from "../support-functions/importFunctions"; // I
 import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
 
+import { useAuth } from "../contexts/AuthContext";
+
 function Matches() {
+  const { currentUser } = useAuth();
+  const userID = currentUser.uid;
   const location = "berlin";
-  const userID = "test-user";
 
   const [contacts, setContacts] = useState({});
   const [contact, setContact] = useState({});

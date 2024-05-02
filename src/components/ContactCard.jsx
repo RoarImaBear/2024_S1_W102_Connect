@@ -19,11 +19,11 @@ export function ContactCard({ userID }) {
     <div className="matches">
       {/* Display contact information */}
       <div className="match-card img">
-        <h2>{contact.name}</h2>
-        {contact.profilePicture && (
-          <img src={contact.profilePicture} alt="Profile" />
+        <h2>{contact?.name}</h2>
+        {contact?.profilePicture && (
+          <img src={contact?.profilePicture} alt="Profile" />
         )}
-        <p>{contact.age}</p>
+        <p>{contact?.age}</p>
       </div>
     </div>
   );

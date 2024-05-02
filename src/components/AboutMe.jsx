@@ -4,9 +4,11 @@ import { doc } from "@firebase/firestore";
 import { useFetchRealtimeDoc } from "../support-functions/importFunctions";
 import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
+import { useAuth } from "../contexts/AuthContext";
 
 export function AboutMe() {
-  const userID = "test-user";
+  const { currentUser } = useAuth();
+  const userID = currentUser.uid;
   const location = "berlin";
 
   const [profileDoc, setDoc] = useState({});

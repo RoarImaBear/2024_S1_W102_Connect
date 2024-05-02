@@ -9,12 +9,15 @@ import {
   updateDoc,
   onSnapshot,
 } from "@firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
 
 import { useFetchRealtimeCollection } from "../support-functions/importFunctions";
 
 export default function FeedCarousel() {
-  const userID = "sean";
   const location = "berlin";
+  const { currentUser } = useAuth();
+  const userID = currentUser.uid;
+  const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
 
   const collectionRef = collection(firestore, "accounts", location, "users");
   const [profileFeed, setProfileFeed] = useState({});
@@ -43,13 +46,28 @@ export default function FeedCarousel() {
 
   function AddButton({ matchee }) {
     const handleConnect = async () => {
-      const docRef = doc(collectionRef, `${userID}/matchmaking/contacts`);
+      const userContactsRef = doc(
+        collectionRef,
+        `${userID}/matchmaking/contacts`
+      );
+      const matcheeContactsRef = doc(
+        collectionRef,
+        `${matchee?.id}/matchmaking/contacts`
+      );
 
       try {
-        await updateDoc(docRef, { [matchee?.id]: matchee?.ref });
+        await updateDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
       } catch (error) {
         if (error.code === "not-found") {
-          await setDoc(docRef, { [matchee?.id]: matchee?.ref });
+          await setDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+        }
+      }
+
+      try {
+        await updateDoc(matcheeContactsRef, { [userID]: userProfileRef });
+      } catch (error) {
+        if (error.code === "not-found") {
+          await setDoc(matcheeContactsRef, { [userID]: userProfileRef });
         }
       }
     };
