@@ -52,16 +52,13 @@ function Matches() {
   return (
     <>
       <Header />
-      <section className="main-container">
-        <h1 style={{ textAlign: "center", marginTop: "10px" }}>Matches Page</h1>
-        <h2 style={{ textAlign: "center", marginTop: "10px" }}>
-          Current Matches
-        </h2>
-
-        {contactsArray.map((userID, index) => (
-          <ContactCard key={index} userID={userID} />
-        ))}
-      </section>
+      <div>
+        <section className="main-container">
+          {contactsArray.map((userID, index) => (
+            <ContactCard key={index} userID={userID} />
+          ))}
+        </section>
+      </div>
     </>
   );
 }
