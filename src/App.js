@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
+import Matches from "./pages/Matches";
 import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
           element={
             <PrivateRoute>
               <Feed />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/matches"
+          element={
+            <PrivateRoute>
+              <Matches />
             </PrivateRoute>
           }
         />
