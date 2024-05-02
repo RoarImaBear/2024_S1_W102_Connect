@@ -4,8 +4,7 @@ import LoginForm from "./pages/LoginForm";
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
+  Route
 } from "react-router-dom";
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
