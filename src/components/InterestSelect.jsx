@@ -57,7 +57,7 @@ import { QuickSwapImage } from "./QuickSwapImage";
     }
   ];*/
 
-  const InterestCheckbox = ({interest}) => {
+  const InterestCheckbox = ({interest,selectedInterests,setSelectedInterest}) => {
 
     return(
 
@@ -68,11 +68,20 @@ import { QuickSwapImage } from "./QuickSwapImage";
       checked={selectedInterests.includes(interest.interest)}
       onChange={(event) => handleCheckboxChange(event)}
     />
-    {interest.interest}
+     {interest.interest}
     </label>);
+
+    <input 
+    type = "checkbox"
+    onChange={(event) => {handleMultipleCheckboxChange(event)}}
+    />
+    const handleMultipleCheckboxChange = (event) => {
+      const InterestsArray = interests.map(i=>i.interest);
+      setSelectedInterest(event.target.checked ? InterestsArray : [])
+    }
   }
 
-  const handleCheckboxChange = ((event) => {
+  const handleCheckboxChange = ((event,selectedInterests,setSelectedInterest) => {
     const checkedInterest = event.target.value;
     if(event.target.checked)
     {
@@ -85,9 +94,9 @@ import { QuickSwapImage } from "./QuickSwapImage";
   });
 
 
-  const SelectInterestList = ({interests, selectedInterests, setSelectedInterests}) => {
+  const SelectInterestList = ({interests}) => {
 
-    
+  const [selectedInterests, setSelectedInterests] = useState([]);
 
     return
     (
@@ -158,7 +167,7 @@ import { QuickSwapImage } from "./QuickSwapImage";
 
   return (
     <div>
-      const [selectedInterests, setSelectedInterests] = useState([]);
+      
       <SelectInterestList interestsRef={interestsRef}/>
 
     </div>
