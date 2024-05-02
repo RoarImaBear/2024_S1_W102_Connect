@@ -96,7 +96,6 @@ export default function FeedCarousel() {
 
   return (
     <>
-      <Header />
       <section className="main-container">
         <div id="feed-card">
           <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
