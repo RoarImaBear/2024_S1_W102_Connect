@@ -1,5 +1,5 @@
 import "../styles/seb.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export function Header() {
   return (
@@ -9,7 +9,7 @@ export function Header() {
           <Link to="/feed">Feed</Link>
         </li>
         <li>
-        <Link to="/home">Home</Link>
+          <Link to="/home">Home</Link>
         </li>
         <li>
           <Link to="/matches">Matches</Link>
