@@ -1,5 +1,4 @@
 import React from "react";
-import Home from "./pages/home";
 import SignUpForm from "./pages/SignUpForm";
 import LoginForm from "./pages/LoginForm";
 import {
@@ -27,14 +26,6 @@ function App() {
         />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
         <Route
           path="/profile"
           element={

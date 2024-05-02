@@ -9,7 +9,7 @@ export function Header() {
           <Link to="/feed">Feed</Link>
         </li>
         <li>
-          <Link to="/home">Home</Link>
+          <Link to="/feed">Home</Link>
         </li>
         <li>
           <Link to="/matches">Matches</Link>
