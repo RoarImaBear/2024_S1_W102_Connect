@@ -3,6 +3,7 @@ import { setDoc, updateDoc } from "@firebase/firestore";
 
 // Functional component that toggles between an editable input field that writes to the database
 // and a static div displaying the data fetched from that same spot in the database.
+// QuickEditField will also create the profile doc on first edit.
 
 export function QuickEditField({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);

@@ -6,8 +6,8 @@ import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 import { useAuth } from "../contexts/AuthContext";
 
-// About mee section of profile containing a QuickSwapImage field and utilising
-// QuickEditFields to create and update relevant profile sections.
+// AboutMe component used by profile page. It loads the userProfile then passes required data to
+// QuickSwapImage field and relevant QuickEditFields.
 export function AboutMe() {
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
@@ -15,36 +15,36 @@ export function AboutMe() {
 
   const [profileDoc, setDoc] = useState({});
 
-  const docRef = doc(firestore, `accounts/${location}/users/${userID}`);
-  useFetchRealtimeDoc(docRef, setDoc);
+  const profileDocRef = doc(firestore, `accounts/${location}/users/${userID}`);
+  useFetchRealtimeDoc(profileDocRef, setDoc);
 
   return (
     <div>
       <QuickSwapImage
         data={profileDoc?.profilePicture}
         fieldName={"profilePicture"}
-        docRef={docRef}
+        docRef={profileDocRef}
       />
       <h5>Name</h5>
       <QuickEditField
         id="name-field"
         data={profileDoc?.name}
         fieldName={"name"}
-        docRef={docRef}
+        docRef={profileDocRef}
       />
       <br />
       <h5>Age</h5>
       <QuickEditField
         data={profileDoc?.age}
         fieldName={"age"}
-        docRef={docRef}
+        docRef={profileDocRef}
       />
       <br />
       <h5>About you</h5>
       <QuickEditField
         data={profileDoc?.about}
         fieldName={"about"}
-        docRef={docRef}
+        docRef={profileDocRef}
       />
     </div>
   );

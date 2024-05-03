@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
-// QuickEditField that returns an image in place of a text component.
-// Functions in a near identical way.
+// Functional component that toggles between an editable input field that writes image URL
+// to the databaseand and a static img component that renders the URL in database.
+// If profile hasn't been created, component will do so.
+
 export function QuickSwapImage({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [imageURL, setImageURL] = useState(data);
