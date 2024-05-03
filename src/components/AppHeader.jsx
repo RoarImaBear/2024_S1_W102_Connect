@@ -7,19 +7,16 @@ export function Header() {
     <header>
       <ul>
         <li>
-          <Link to="/feed">Feed</Link>
-        </li>
-        <li>
-          <Link to="/feed">Home</Link>
-        </li>
-        <li>
           <Link to="/matches">Matches</Link>
         </li>
         <li>
-          <LogoutButton />
+          <Link to="/feed">Feed</Link>
         </li>
         <li>
           <Link to="/profile">Profile</Link>
+        </li>
+        <li>
+          <LogoutButton />
         </li>
       </ul>
     </header>
