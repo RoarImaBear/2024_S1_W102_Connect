@@ -16,12 +16,13 @@ function Matches() {
   const [contact, setContact] = useState({});
   const [contactsArray, setContactsArray] = useState([]);
 
-  // Fetch contacts from Firestore
+  // fetches contacts from Firestore
   useFetchRealtimeDoc(
     doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
     setContacts
   );
 
+  //convert contact objects into an array
   useEffect(() => {
     let outputArray = [];
     if (contacts) {
@@ -35,7 +36,7 @@ function Matches() {
 
   console.log(contactsArray);
 
-  // Subscribe to changes for the "test-user" contact
+  // Subscribe to changes for the "user" contact
   useEffect(() => {
     if (contacts && contacts[userID]) {
       const unsubscribe = onSnapshot(contacts[userID], (doc) => {
@@ -45,7 +46,7 @@ function Matches() {
         } else {
           console.log("Failed to load doc");
         }
-      });
+      }); //unsubscribe from listener
       return () => unsubscribe();
     }
   }, [contacts]);
