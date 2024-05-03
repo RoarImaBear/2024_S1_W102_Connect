@@ -6,6 +6,8 @@ import { QuickEditField } from "./QuickEditField";
 import { QuickSwapImage } from "./QuickSwapImage";
 import { useAuth } from "../contexts/AuthContext";
 
+// About mee section of profile containing a QuickSwapImage field and utilising
+// QuickEditFields to create and update relevant profile sections.
 export function AboutMe() {
   const { currentUser } = useAuth();
   const userID = currentUser.uid;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
+// QuickEditField that returns an image in place of a text component.
+// Functions in a near identical way.
 export function QuickSwapImage({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [imageURL, setImageURL] = useState(data);

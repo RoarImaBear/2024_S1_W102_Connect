@@ -13,18 +13,25 @@ import { useAuth } from "../contexts/AuthContext";
 
 import { useFetchRealtimeCollection } from "../support-functions/importFunctions";
 
+// Functional component used to display 'carousel' of pictures on the feed page.
+
 export default function FeedCarousel() {
   const location = "berlin";
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
   const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
 
-  const collectionRef = collection(firestore, "accounts", location, "users");
-  const [profileFeed, setProfileFeed] = useState({});
-  useFetchRealtimeCollection(collectionRef, setProfileFeed);
-
+  const profileCollectionRef = collection(
+    firestore,
+    "accounts",
+    location,
+    "users"
+  );
   const [currentIndex, setIndex] = useState(0);
+  const [profileFeed, setProfileFeed] = useState({});
+  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed);
 
+  // Profile Card compoennt, displaying relevant user profile.
   function ProfileCard({ profile }) {
     return (
       <>
@@ -44,14 +51,15 @@ export default function FeedCarousel() {
     );
   }
 
+  // Custom button that writes matchee to contacts and currentUser to corresponding matchee's contacts
   function AddButton({ matchee }) {
     const handleConnect = async () => {
       const userContactsRef = doc(
-        collectionRef,
+        profileCollectionRef,
         `${userID}/matchmaking/contacts`
       );
       const matcheeContactsRef = doc(
-        collectionRef,
+        profileCollectionRef,
         `${matchee?.id}/matchmaking/contacts`
       );
 
@@ -79,11 +87,10 @@ export default function FeedCarousel() {
     );
   }
 
+  // Function for cycling through profiles, incrementing index and resetting it if upper or lower boundary is met
   const handlePrevOrNext = (value) => {
     let profileCount = profileFeed.length;
     let newIndex = currentIndex + value;
-
-    // Add check: Is profile in context? If true, skip to next
 
     if (newIndex < 0) {
       newIndex = profileCount - 1;

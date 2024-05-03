@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { setDoc, updateDoc } from "@firebase/firestore";
 
+// Functional component that toggles between an editable input field that writes to the database
+// and a static div displaying the data fetched from that same spot in the database.
+
 export function QuickEditField({ data, fieldName, docRef }) {
   const [editable, setEditable] = useState(false);
   const [inputValue, setInputValue] = useState(data);
 
+  // Updates the database for specified field
   const handleUpdateSubmit = async () => {
     let newValue = inputValue;
 
@@ -18,10 +22,12 @@ export function QuickEditField({ data, fieldName, docRef }) {
     setEditable(!editable);
   };
 
+  // Handles input field change.
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  // Conditionally define field, depending if editable or not
   let field;
   if (editable) {
     field = (

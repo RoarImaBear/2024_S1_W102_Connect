@@ -23,10 +23,11 @@ function Matches() {
   );
 
   useEffect(() => {
-    const outputArray = [];
+    let outputArray = [];
     if (contacts) {
-      for (const [key, value] of Object.entries(contacts))
-        outputArray.push(value);
+      // for (const [key, value] of Object.entries(contacts))
+      //   outputArray.push(value);
+      outputArray = Object.values(contacts);
     }
     // console.log(outputArray);
     setContactsArray(outputArray);

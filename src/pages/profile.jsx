@@ -4,6 +4,7 @@ import Header from "../components/AppHeader";
 import { addDoc, deleteDoc } from "@firebase/firestore";
 import { AboutMe } from "../components/AboutMe";
 
+// Profile page displaying relevant components.
 export default function Profile() {
   return (
     <>
