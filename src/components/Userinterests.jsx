@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { firestore } from "../firebase";
 import { doc, setDoc, updateDoc } from "@firebase/firestore";
 import { useFetchRealtimeDoc } from "../support-functions/importFunctions";

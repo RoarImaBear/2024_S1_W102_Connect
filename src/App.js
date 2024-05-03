@@ -9,6 +9,7 @@ import {
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
 import Matches from "./pages/Matches";
+import Location from "./pages/Location";
 import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
@@ -25,6 +26,14 @@ function App() {
         />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route 
+        path = "/Location"
+        element = {
+          <PrivateRoute>
+            <Location />
+          </PrivateRoute>
+        }
+        />
         <Route
           path="/profile"
           element={
