@@ -1,44 +1,39 @@
 import React, { useState } from "react";
 import { firestore } from "../firebase";
-import {
-  doc,
-  updateDoc,
-  setDoc,
-} from "@firebase/firestore";
-import {
-  useFetchRealtimeDoc,
-} from "../support-functions/importFunctions";
-
+import { doc, updateDoc, setDoc } from "@firebase/firestore";
+import { useFetchRealtimeDoc } from "../support-functions/importFunctions";
 
 const userID = "test-user";
 const location = "berlin";
 
-
-function InterestCheckbox({ interest}) {
+function InterestCheckbox({ interest }) {
   // console.log(interest);
-  const [userInterestArray, setUserInterestArray]= useState([]);
-  
+  const [userInterestArray, setUserInterestArray] = useState([]);
+
   async function onClick() {
     //event.preventDefault();
-    //write to database here 
+    //write to database here
 
-    const interestsRef = doc(firestore, `accounts/${location}/users/${userID}/user-interests/test`);
-    console.log('on Submit', userID)
+    const interestsRef = doc(
+      firestore,
+      `accounts/${location}/users/${userID}/user-interests/test`
+    );
+    console.log("on Submit", userID);
 
     try {
       await updateDoc(interestsRef, { [interest]: true });
-      console.log("checkpoint 1")
+      console.log("checkpoint 1");
     } catch (error) {
       if (error.code === "not-found") {
         await setDoc(interestsRef, { [interest]: true }); //error here
-        console.log("checkpoint 2")
+        console.log("checkpoint 2");
       }
     }
   }
 
   return (
-    <div>
-        <button onClick={onClick}>{interest}</button>
+    <div id="interest-checkbox">
+      <button onClick={onClick}>{interest}</button>
     </div>
   );
 }
@@ -55,11 +50,11 @@ export function InterestSelect() {
   const [profileDoc, setDoc] = useState({});
 
   useFetchRealtimeDoc(interestsKeyRef, setInterestsArray);
- 
+
   let interests = [];
 
   return (
-    <div>
+    <div id="interest-options">
       <p>Select Interests</p>
       {interestsKeyArray?.interests?.map((interest, index) => (
         <InterestCheckbox key={index} interest={interest} />

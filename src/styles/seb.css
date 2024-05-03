@@ -28,6 +28,23 @@ div #feed-card {
   width: 50vw;
 }
 
+#interest-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+#interest-options button {
+  font-size: 0.8rem;
+}
+
+#user-interests {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#interest-checkbox button {
+  font-size: 0.8rem;
+}
+
 #big-button {
   flex: 1;
 }
@@ -67,19 +84,19 @@ div #quick-edit {
   min-height: 1rem;
 }
 
-.purple-container{
-  width:150vh;
+.purple-container {
+  width: 150vh;
   height: 85vh;
-  background-color: rgba(17, 25, 40,0.75);
-  margin:0 auto;
-  margin-top:20px;
+  background-color: rgba(17, 25, 40, 0.75);
+  margin: 0 auto;
+  margin-top: 20px;
   padding: 20px;
   border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(19px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.125);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 .match-container {
   display: flex;
@@ -116,7 +133,7 @@ div #quick-edit {
   margin: 0;
 }
 
-.item{
+.item {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -124,7 +141,3 @@ div #quick-edit {
   cursor: pointer;
   border-bottom: 1px solid #dddddd35;
 }
-
-
-
-
