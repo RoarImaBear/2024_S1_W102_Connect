@@ -1,10 +1,25 @@
-# Getting Started with Create React App
+# Welcome to Connect!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Connect is a social networking platform designed to connect travellers with locals. Developed by Sebastian Dymanski, Azel Saralaeva, Phoebe Sunata and James Hodder, it's the seed of a future Fortune500 and hopefully an 'A'.
+
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Using the app
+
+> npm install (to download node_modules and dependencies)
+> npm run start (starts application in web browser)
+> create new account using an email and password or log in with existing credentials
+> update your profile in the profile tab, using a url for the profile picture
+> feed page allows you to "connect" with other users and choose from possible users
+> matches page shows your current matches
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs dependencies required to run the app locally.
 
 ### `npm start`
 
