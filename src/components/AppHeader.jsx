@@ -9,10 +9,8 @@ export function Header() {
         <li>
           <Link to="/matches">Matches</Link>
         </li>
-        <li>
-          <Link to="/feed">
-            <img src="../images/globe-icon.svg" alt="Nav icon." />
-          </Link>
+        <li id="logo-link">
+          <Link to="/feed"></Link>
         </li>
         <li>
           <Link to="/profile">Profile</Link>
