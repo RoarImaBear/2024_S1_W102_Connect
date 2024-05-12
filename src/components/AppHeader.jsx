@@ -11,10 +11,7 @@ export function Header() {
         </li>
         <li>
           <Link to="/feed">
-            <img
-              src="/src/images/glbal-background.png"
-              alt="Nav item to matchmaking feed represented by a globe icon."
-            />
+            <img src="../images/globe-icon.svg" alt="Nav icon." />
           </Link>
         </li>
         <li>

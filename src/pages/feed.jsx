@@ -8,7 +8,7 @@ export default function Feed() {
     <>
       <Header />
       <div id="background"></div>
-      <section class="main-section" id="feed-main-section">
+      <section className="main-section" id="feed-main-section">
         <FeedCarousel />
       </section>
     </>

@@ -55,7 +55,7 @@ function Matches() {
     <>
       <Header />
       <div id="background"></div>
-      <section class="main-section">
+      <section className="main-section">
         {contactsArray.map((userID, index) => (
           <ContactCard key={index} userID={userID} />
         ))}

@@ -10,7 +10,7 @@ export default function Profile() {
     <>
       <Header />
       <div id="background"></div>
-      <section class="main-section" id="profile-main-section">
+      <section className="main-section" id="profile-main-section">
         <AboutMe />
         <Userinterests />
         <InterestSelect />
