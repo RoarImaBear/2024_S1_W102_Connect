@@ -1,4 +1,4 @@
-import "../styles/seb.css";
+import "../styles/main-style.css";
 import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 

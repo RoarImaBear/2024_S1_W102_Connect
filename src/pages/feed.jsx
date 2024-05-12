@@ -1,8 +1,5 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Header from "../components/AppHeader";
-import { useAuth } from "../contexts/AuthContext";
-import { firestore } from "../firebase";
-import { collection, doc } from "@firebase/firestore";
 
 import FeedCarousel from "../components/FeedCarousel";
 

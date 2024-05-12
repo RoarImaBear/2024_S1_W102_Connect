@@ -1,14 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
-import Header from "../components/AppHeader";
+import React, { useState } from "react";
 
 import { firestore } from "../firebase";
-import {
-  collection,
-  doc,
-  setDoc,
-  updateDoc,
-  onSnapshot,
-} from "@firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "@firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 
 import { useFetchRealtimeCollection } from "../support-functions/importFunctions";
