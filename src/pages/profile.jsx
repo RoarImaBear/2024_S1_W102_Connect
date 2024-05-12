@@ -9,13 +9,12 @@ export default function Profile() {
   return (
     <>
       <Header />
-      <div>
-        <section className="main-container">
-          <AboutMe />
-          <Userinterests />
-          <InterestSelect />
-        </section>
-      </div>
+      <div id="background"></div>
+      <section class="main-section" id="profile-main-section">
+        <AboutMe />
+        <Userinterests />
+        <InterestSelect />
+      </section>
     </>
   );
 }

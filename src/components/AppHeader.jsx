@@ -10,7 +10,12 @@ export function Header() {
           <Link to="/matches">Matches</Link>
         </li>
         <li>
-          <Link to="/feed">Feed</Link>
+          <Link to="/feed">
+            <img
+              src="/src/images/glbal-background.png"
+              alt="Nav item to matchmaking feed represented by a globe icon."
+            />
+          </Link>
         </li>
         <li>
           <Link to="/profile">Profile</Link>

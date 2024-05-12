@@ -54,13 +54,12 @@ function Matches() {
   return (
     <>
       <Header />
-      <div>
-        <section className="main-container">
-          {contactsArray.map((userID, index) => (
-            <ContactCard key={index} userID={userID} />
-          ))}
-        </section>
-      </div>
+      <div id="background"></div>
+      <section class="main-section">
+        {contactsArray.map((userID, index) => (
+          <ContactCard key={index} userID={userID} />
+        ))}
+      </section>
     </>
   );
 }

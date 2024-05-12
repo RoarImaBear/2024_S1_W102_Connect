@@ -1,58 +1,36 @@
+/* VARIABLES */
+:root {
+  --background-1: rgba(242, 242, 242, 0.94);
+  --background-2: rgba(242, 242, 242, 0.95);
+  --button-background-1: rgb(154, 181, 229);
+
+  --header-height: 11vh;
+
+  --font-main: Arial, sans-serif;
+}
+
+/* GLOBAL PROPERTIES */
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-main);
 }
 
-div {
-  border: 1px solid black;
-  margin: 2px;
-  padding: 2px;
-}
-
-div #profile-card {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex: 3;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 70vh;
-}
-
-div #feed-card {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
-  width: 50vw;
-}
-
-#interest-options {
-  display: flex;
-  flex-wrap: wrap;
-}
-#interest-options button {
-  font-size: 0.8rem;
-}
-
-#user-interests {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#interest-checkbox button {
-  font-size: 0.8rem;
-}
-
-#big-button {
-  flex: 1;
-}
+/* HEADER STYLING */
 
 header {
-  border: 1px solid black;
-  margin: 2px;
-  padding: 2px;
+  background-color: var(--background-2);
+  padding: 1px;
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+  height: var(--header-height);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+header a {
+  text-decoration: none;
 }
 
 header ul {
@@ -73,16 +51,106 @@ header li:last-child {
   margin-left: auto;
 }
 
-#profile-picture {
-  width: 140px;
+/* GENERAL BODY STYLING */
+
+#background {
+  position: fixed;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/src/images/global-background.png");
+  background-size: cover;
+  background-position: center;
 }
 
-input {
+.main-section {
+  position: relative;
+  z-index: 100;
+  background: var(--background-1);
+  width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2px;
+  transform: translateY(calc(var(--header-height)));
+}
+
+/* PROFILE PAGE STYLING */
+
+.main-section#profile-main-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#interest-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+#interest-options button {
+  font-size: 0.8rem;
+}
+
+#user-interests {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#interest-checkbox button {
+  font-size: 0.8rem;
+}
+
+#profile-picture {
+  width: 140px;
 }
 
 div #quick-edit {
   min-height: 1rem;
 }
+
+/* FEED PAGE STYLING */
+
+.main-section#feed-main-section {
+  height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#feed-carousel {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+}
+
+div #feed-profile-card {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+#feed-carousel #big-button {
+  border: none;
+  background-color: var(--button-background-1);
+  flex: 1;
+}
+
+#feed-carousel #connect-button {
+  border: none;
+  background-color: var(--button-background-1);
+}
+
+#feed-profile-card img {
+  width: 200px;
+  overflow: hidden;
+}
+
+/* CONTACTS PAGE STYLING */
 
 .purple-container {
   width: 150vh;
@@ -98,6 +166,7 @@ div #quick-edit {
   backdrop-filter: blur(19px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
+
 .match-container {
   display: flex;
   flex-wrap: wrap;

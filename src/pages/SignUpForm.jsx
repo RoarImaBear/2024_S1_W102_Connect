@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import "../styles/pre-auth-style.css";
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -70,14 +71,9 @@ const SignUpForm = () => {
   };
 
   return (
-    <div
-      className="container d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
-    >
+    <div id="login-form-container">
       <form className="border p-4" onSubmit={handleSubmit}>
-        <p className="mb-3" style={{ fontWeight: "bold", fontSize: "24px" }}>
-          Sign up
-        </p>
+        <h4>Sign up</h4>
         {error && <div className="alert alert-danger">{error}</div>}
         {successMessage && (
           <div className="alert alert-success">{successMessage}</div>

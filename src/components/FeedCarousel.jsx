@@ -28,13 +28,9 @@ export default function FeedCarousel() {
   function ProfileCard({ profile }) {
     return (
       <>
-        <div id="profile-card">
+        <div id="feed-profile-card">
           <h1>{profile?.data?.name}</h1>
-          <img
-            id="profile-picture"
-            src={profile?.data?.profilePicture}
-            alt=""
-          />
+          <img id="" src={profile?.data?.profilePicture} alt="" />
           <h4>{profile?.data?.age}</h4>
           <p>{profile?.data?.about}</p>
           <br />
@@ -74,7 +70,7 @@ export default function FeedCarousel() {
     };
 
     return (
-      <button onClick={() => handleConnect(matchee)}>
+      <button id="connect-button" onClick={() => handleConnect(matchee)}>
         <h3>Connect!</h3>
       </button>
     );
@@ -96,17 +92,15 @@ export default function FeedCarousel() {
 
   return (
     <>
-      <section className="main-container">
-        <div id="feed-card">
-          <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
-            <h1>Prev</h1>
-          </button>
-          <ProfileCard profile={profileFeed[currentIndex]} />
-          <button id="big-button" onClick={() => handlePrevOrNext(1)}>
-            <h1>Next</h1>
-          </button>
-        </div>
-      </section>
+      <div id="feed-carousel">
+        <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
+          <h1>Prev</h1>
+        </button>
+        <ProfileCard profile={profileFeed[currentIndex]} />
+        <button id="big-button" onClick={() => handlePrevOrNext(1)}>
+          <h1>Next</h1>
+        </button>
+      </div>
     </>
   );
 }

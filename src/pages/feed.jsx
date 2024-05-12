@@ -7,11 +7,10 @@ export default function Feed() {
   return (
     <>
       <Header />
-      <div>
-        <section className="main-container">
-          <FeedCarousel />
-        </section>
-      </div>
+      <div id="background"></div>
+      <section class="main-section" id="feed-main-section">
+        <FeedCarousel />
+      </section>
     </>
   );
 }
