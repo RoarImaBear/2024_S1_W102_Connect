@@ -104,6 +104,30 @@ header li:last-child {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+#profile-about-me {
+  display: flex;
+  flex-direction: column;
+  max-width: 60vw;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: 5vh 2vw 5vh 2vw;
+}
+
+#profile-top-div {
+  display: flex;
+  flex-direction: row;
+}
+
+#profile-top-text {
+  flex-direction: column;
+  padding: 3vw;
+}
+
+#profile-picture {
+  max-height: 300px;
 }
 
 #interest-options {
@@ -121,10 +145,6 @@ header li:last-child {
 
 #interest-checkbox button {
   font-size: 0.8rem;
-}
-
-#profile-picture {
-  width: 140px;
 }
 
 div #quick-edit {
