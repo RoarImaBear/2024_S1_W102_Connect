@@ -17,12 +17,14 @@ import { useFetchRealtimeDoc } from "../support-functions/importFunctions";
     <div>
         <label>Select a location: 
         <select value="location" onChange={handleSubmit}>
-          <option location="Berlin">pick a country</option>
+          <option location="Berlin">pick a city</option>
+          <option location="Berlin">Berlin</option>
+          <option location="Berlin">London</option>
+          <option location="Berlin">Auckland</option>
           {locations.map((location, index) => (Options({ location })))}
         </select>
         </label>
         <br />
-        <input type="submit" value="Submit" />
     </div>
   );
 }
