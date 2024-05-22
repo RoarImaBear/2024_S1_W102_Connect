@@ -20,7 +20,7 @@ export function ContactCard({ userID }) {
   }, []);
 
   return (
-    <div className="matches">
+    <div data-testid="contactCard" className="matches">
       {/* Display match contact information such as name, age and profile picture*/}
       <div className="match-card img">
         <h2>{contact?.name}</h2>
