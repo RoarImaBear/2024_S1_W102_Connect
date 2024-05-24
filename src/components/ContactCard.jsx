@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
+import { firestore } from "../firebase";
 
 //functional component contact card taking in user ID for fetching contact information
-export function ContactCard({ userID }) {
+export function ContactCard({ contactDocRef }) {
   const [contact, setContact] = useState({});
+
+  // console.log("passed value ", userID);
+
+  // const contactDocRef = doc(firestore, `accounts/berlin/users/${userID}`);
 
   //fetches contact information when component mounts
   useEffect(() => {
-    const unsubscribe = onSnapshot(userID, (doc) => {
+    const unsubscribe = onSnapshot(contactDocRef, (doc) => {
       if (doc.exists) {
         const fetchedData = doc.data();
         //updates the state with data fetched from firestore
         setContact(fetchedData);
+        console.log("fetched doc: ", fetchedData);
       } else {
         console.log("Failed to load doc");
       }

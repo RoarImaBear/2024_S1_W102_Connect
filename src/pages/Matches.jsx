@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
-import { useFetchRealtimeDoc } from "../support-functions/importFunctions"; // Import the useFetchRealtimeDoc hook
+import {
+  useFetchRealtimeCollection,
+  useFetchRealtimeDoc,
+} from "../support-functions/importFunctions"; // Import the useFetchRealtimeDoc hook
 import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
 
@@ -12,55 +15,36 @@ function Matches() {
   const userID = currentUser.uid;
   const location = "berlin";
 
-  const [contacts, setContacts] = useState({});
-  const [contact, setContact] = useState({});
-  const [contactsArray, setContactsArray] = useState([]);
-
-  // fetches contacts from Firestore
-  // ** THIS NEEDS TO BE CHANGED TO FETCHING COLLECTION
-  useFetchRealtimeDoc(
-    doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
-    setContacts
+  const contactsColRef = collection(
+    firestore,
+    `accounts/${location}/users/${userID}/contacts`
   );
 
-  // ** Map collection.userID to ContactCard components
+  const [contactsCollection, setContactsCollection] = useState([]);
+
+  useFetchRealtimeCollection(contactsColRef, setContactsCollection);
 
   //convert contact objects into an array
-  useEffect(() => {
-    let outputArray = [];
-    if (contacts) {
-      // for (const [key, value] of Object.entries(contacts))
-      //   outputArray.push(value);
-      outputArray = Object.values(contacts);
-    }
-    // console.log(outputArray);
-    setContactsArray(outputArray);
-  }, [contacts]);
 
-  console.log(contactsArray);
+  console.log(contactsCollection);
 
-  // Subscribe to changes for the "user" contact
-  useEffect(() => {
-    if (contacts && contacts[userID]) {
-      const unsubscribe = onSnapshot(contacts[userID], (doc) => {
-        if (doc.exists) {
-          const fetchedData = doc.data();
-          setContact(fetchedData);
-        } else {
-          console.log("Failed to load doc");
-        }
-      }); //unsubscribe from listener
-      return () => unsubscribe();
-    }
-  }, [contacts]);
+  contactsCollection.map((contact, index) => {
+    console.log(contact.id);
+  });
 
   return (
     <>
       <Header />
       <div id="background"></div>
       <section className="main-section">
-        {contactsArray.map((userID, index) => (
-          <ContactCard key={index} userID={userID} />
+        {contactsCollection.map((contact, index) => (
+          <ContactCard
+            key={index}
+            contactDocRef={doc(
+              firestore,
+              `accounts/berlin/users/${contact?.id}`
+            )}
+          />
         ))}
       </section>
     </>
@@ -68,3 +52,37 @@ function Matches() {
 }
 
 export default Matches;
+
+// const [contacts, setContacts] = useState({});
+// const [contact, setContact] = useState({});
+// const [contactsArray, setContactsArray] = useState([]);
+
+// useFetchRealtimeDoc(
+//   doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
+//   setContacts
+// );
+
+// Subscribe to changes for the "user" contact
+// useEffect(() => {
+//   if (contacts && contacts[userID]) {
+//     const unsubscribe = onSnapshot(contacts[userID], (doc) => {
+//       if (doc.exists) {
+//         const fetchedData = doc.data();
+//         setContact(fetchedData);
+//       } else {
+//         console.log("Failed to load doc");
+//       }
+//     }); //unsubscribe from listener
+//     return () => unsubscribe();
+//   }
+// }, [contacts]);
+
+// useEffect(() => {
+//   let outputArray = [];
+//   if (contacts) {
+//     outputArray = Object.values(contacts);
+//   }
+// for (const [key, value] of Object.entries(contacts))
+//   outputArray.push(value);
+//   setContactsArray(outputArray);
+// }, [contacts]);
