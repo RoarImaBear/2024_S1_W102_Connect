@@ -45,11 +45,11 @@ export default function FeedCarousel() {
     const handleConnect = async () => {
       const userContactsRef = doc(
         profileCollectionRef,
-        `${userID}/matchmaking/contacts`
+        `${userID}/contacts/${matchee?.id}`
       );
       const matcheeContactsRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/matchmaking/contacts`
+        `${matchee?.id}/contacts/${userID}`
       );
 
       try {
