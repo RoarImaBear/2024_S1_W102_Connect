@@ -194,10 +194,10 @@ div #feed-profile-card {
   overflow: hidden;
 }
 
-/* CONTACTS PAGE STYLING */
+/* MATCHES PAGE STYLING */
 
 .purple-container {
-  width: 150vh;
+  width: auto;
   height: 85vh;
   background-color: rgba(17, 25, 40, 0.75);
   margin: 0 auto;
@@ -220,7 +220,7 @@ div #feed-profile-card {
 
 /* Match card */
 .match-card {
-  width: 300px;
+  width: auto;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;

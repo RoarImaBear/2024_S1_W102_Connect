@@ -6,10 +6,6 @@ import { firestore } from "../firebase";
 export function ContactCard({ contactDocRef }) {
   const [contact, setContact] = useState({});
 
-  // console.log("passed value ", userID);
-
-  // const contactDocRef = doc(firestore, `accounts/berlin/users/${userID}`);
-
   //fetches contact information when component mounts
   useEffect(() => {
     const unsubscribe = onSnapshot(contactDocRef, (doc) => {
