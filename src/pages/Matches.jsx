@@ -23,7 +23,7 @@ function Matches() {
     setContacts
   );
 
-  // ** Map collection.userID to ContactCard components
+  // ** Map collection.userID to ContactCard components -- should already come in an array from custom useFetchREaltimeCol hook
 
   //convert contact objects into an array
   useEffect(() => {
