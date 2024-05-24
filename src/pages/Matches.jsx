@@ -17,10 +17,13 @@ function Matches() {
   const [contactsArray, setContactsArray] = useState([]);
 
   // fetches contacts from Firestore
+  // ** THIS NEEDS TO BE CHANGED TO FETCHING COLLECTION
   useFetchRealtimeDoc(
     doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
     setContacts
   );
+
+  // ** Map collection.userID to ContactCard components
 
   //convert contact objects into an array
   useEffect(() => {

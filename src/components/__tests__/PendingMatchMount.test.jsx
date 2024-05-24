@@ -2,8 +2,8 @@ import { TextEncoder, TextDecoder } from "util";
 import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { ContactCard } from "../ContactCard";
-import { doc, onSnapshot } from "firebase/firestore";
+import { PendingContactCard } from "../PendingContactCard";
+import { doc } from "firebase/firestore";
 import { firestore } from "../../firebase";
 
 global.TextEncoder = TextEncoder;
@@ -16,7 +16,7 @@ const testDocRef = doc(
 );
 
 test("should render a contact card match card if one exists", () => {
-  render(<ContactCard userID={testDocRef} />);
-  const contactCard = screen.getByTestId("contactCard");
+  render(<PendingContactCard userID={testDocRef} />);
+  const contactCard = screen.getByTestId("PendincContactCard");
   expect(contactCard).toBeInTheDocument();
 });
