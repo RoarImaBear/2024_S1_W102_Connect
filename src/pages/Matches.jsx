@@ -47,8 +47,9 @@ function Matches() {
             )}
           />
         ))}
+        <Chat />
       </section>
-      <Chat />
+      
     </>
   );
 }

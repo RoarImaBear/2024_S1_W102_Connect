@@ -10,6 +10,7 @@ const Chat = () => {
     <div className="chat">
       <div className="top">
         <div className="user">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YOtOwhKH61_mrmCEIKBViQ3JEfwPlz2SEZClZqKDp4XkjdjV" alt=""/>
           <div className="texts">
             <span>Jane Doe</span>
             <p>Lorem ipsum dolor, sit amet.</p>
@@ -18,7 +19,7 @@ const Chat = () => {
       </div>
       <div className="center">
         <div className="message">
-          <img src="...\images\global-background.png" alt=""/>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YOtOwhKH61_mrmCEIKBViQ3JEfwPlz2SEZClZqKDp4XkjdjV" alt=""/>
           <div className="texts">
             <p>
               Lorem impsum
