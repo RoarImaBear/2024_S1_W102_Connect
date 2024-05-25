@@ -56,9 +56,14 @@ function Matches() {
       <Header />
       <div id="background"></div>
       <section className="main-section">
-        {contactsArray.map((userID, index) => (
-          <ContactCard key={index} userID={userID} />
-        ))}
+        {contactsArray.map(
+          (
+            userID,
+            index // for MEssaging, we are still passing index but userID will be swapped with Message Object
+          ) => (
+            <ContactCard key={index} userID={userID} />
+          )
+        )}
       </section>
     </>
   );

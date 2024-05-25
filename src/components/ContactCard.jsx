@@ -22,7 +22,7 @@ export function ContactCard({ userID }) {
   return (
     <div className="matches">
       {/* Display match contact information such as name, age and profile picture*/}
-      <div className="match-card img">
+      <div className="chat img">
         <h2>{contact?.name}</h2>
         {contact?.profilePicture && (
           <img src={contact?.profilePicture} alt="Profile" />
