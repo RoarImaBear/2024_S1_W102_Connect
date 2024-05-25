@@ -7,7 +7,7 @@ import {
 } from "../support-functions/importFunctions"; // Import the useFetchRealtimeDoc hook
 import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
-
+import Chat from "../components/Chat/chat"
 import { useAuth } from "../contexts/AuthContext";
 
 // Changes made to work with Firestore contacts collection -- ready for chat implementation
@@ -48,6 +48,7 @@ function Matches() {
           />
         ))}
       </section>
+      <Chat />
     </>
   );
 }
