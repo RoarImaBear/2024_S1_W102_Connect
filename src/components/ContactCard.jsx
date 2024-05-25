@@ -24,7 +24,7 @@ export function ContactCard({ contactDocRef }) {
   return (
     <div data-testid="contactCard" className="matches">
       {/* Display match contact information such as name, age and profile picture*/}
-      <div className="chat img">
+      <div className="match-card img">
         <h2>{contact?.name}</h2>
         {contact?.profilePicture && (
           <img src={contact?.profilePicture} alt="Profile" />
