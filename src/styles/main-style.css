@@ -89,6 +89,7 @@ header li:last-child {
   margin-right: auto;
   padding: 2px;
   transform: translateY(calc(var(--header-height)));
+  display: flex;
 }
 
 /* PROFILE PAGE STYLING */
@@ -209,6 +210,18 @@ div #feed-profile-card {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+}
+
+.contacts-container {
+  width: 40%; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+}
+.chat-container {
+  width: 60%; 
+  display: flex;
+  flex-direction: column;
 }
 
 /* Match card */

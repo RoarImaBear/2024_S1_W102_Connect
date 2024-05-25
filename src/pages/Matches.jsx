@@ -38,18 +38,21 @@ function Matches() {
       <Header />
       <div id="background"></div>
       <section className="main-section">
-        {contactsCollection.map((contact, index) => (
-          <ContactCard
-            key={index}
-            contactDocRef={doc(
-              firestore,
-              `accounts/berlin/users/${contact?.id}`
-            )}
-          />
-        ))}
-        <Chat />
+        <div className="contacts-container">
+          {contactsCollection.map((contact, index) => (
+            <ContactCard
+              key={index}
+              contactDocRef={doc(
+                firestore,
+                `accounts/berlin/users/${contact?.id}`
+              )}
+            />
+          ))}
+        </div>
+        <div className="chat-container">
+          <Chat />
+        </div>
       </section>
-      
     </>
   );
 }
