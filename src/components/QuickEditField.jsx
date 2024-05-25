@@ -17,7 +17,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
       await updateDoc(docRef, { [fieldName]: newValue });
     } catch (error) {
       if (error.code === "not-found") {
-        await setDoc(docRef, { [fieldName]: newValue }); //error here
+        await setDoc(docRef, { [fieldName]: newValue });
       }
     }
     setEditable(!editable);
@@ -37,7 +37,7 @@ export function QuickEditField({ data, fieldName, docRef }) {
           id="field"
           value={inputValue}
           onChange={handleChange}
-          onClick={(event) => event.stopPropagation()} // to prevent click on input field from counting as click on thing, error here
+          onClick={(event) => event.stopPropagation()} // stops click event form propagating to parent div
         />
         <button onClick={handleUpdateSubmit}>Submit</button>
       </div>

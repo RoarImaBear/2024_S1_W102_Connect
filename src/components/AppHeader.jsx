@@ -6,6 +6,7 @@ export function Header() {
   return (
     <header>
       <ul>
+        <li id="invisible-child"></li>
         <li>
           <Link to="/matches">Matches</Link>
         </li>

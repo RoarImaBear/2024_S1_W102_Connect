@@ -41,15 +41,17 @@ export default function FeedCarousel() {
   }
 
   // Custom button that writes matchee to contacts and currentUser to corresponding matchee's contacts
+
+  // Time to make this actually work properly....
   function AddButton({ matchee }) {
     const handleConnect = async () => {
       const userContactsRef = doc(
         profileCollectionRef,
-        `${userID}/matchmaking/contacts`
+        `${userID}/contacts/${matchee?.id}`
       );
       const matcheeContactsRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/matchmaking/contacts`
+        `${matchee?.id}/contacts/${userID}`
       );
 
       try {
@@ -81,7 +83,14 @@ export default function FeedCarousel() {
     let profileCount = profileFeed.length;
     let newIndex = currentIndex + value;
 
-    if (newIndex < 0) {
+    if (profileFeed[newIndex]?.id === userID && value > 0) {
+      newIndex++;
+    }
+    if (profileFeed[newIndex]?.id === userID && value < 0) {
+      newIndex--;
+    }
+
+    if (newIndex <= 0) {
       newIndex = profileCount - 1;
     } else if (newIndex > profileCount - 1) {
       newIndex = 0;
