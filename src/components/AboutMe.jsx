@@ -19,26 +19,30 @@ export function AboutMe() {
   useFetchRealtimeDoc(profileDocRef, setDoc);
 
   return (
-    <div>
-      <QuickSwapImage
-        data={profileDoc?.profilePicture}
-        fieldName={"profilePicture"}
-        docRef={profileDocRef}
-      />
-      <h5>Name</h5>
-      <QuickEditField
-        id="name-field"
-        data={profileDoc?.name}
-        fieldName={"name"}
-        docRef={profileDocRef}
-      />
-      <br />
-      <h5>Age</h5>
-      <QuickEditField
-        data={profileDoc?.age}
-        fieldName={"age"}
-        docRef={profileDocRef}
-      />
+    <div id="profile-about-me">
+      <div id="profile-top-div">
+        <QuickSwapImage
+          data={profileDoc?.profilePicture}
+          fieldName={"profilePicture"}
+          docRef={profileDocRef}
+        />
+        <div id="profile-top-text">
+          <h5>Name</h5>
+          <QuickEditField
+            id="name-field"
+            data={profileDoc?.name}
+            fieldName={"name"}
+            docRef={profileDocRef}
+          />
+          <br />
+          <h5>Age</h5>
+          <QuickEditField
+            data={profileDoc?.age}
+            fieldName={"age"}
+            docRef={profileDocRef}
+          />
+        </div>
+      </div>
       <br />
       <h5>About you</h5>
       <QuickEditField

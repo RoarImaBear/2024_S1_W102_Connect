@@ -1,0 +1,24 @@
+/* VARIABLES */
+:root {
+  --background-color-1: rgba(255, 255, 255, 0.94);
+  --background-color-2: rgba(242, 242, 242, 0.95);
+
+  --header-height: 11vh;
+}
+
+/* GLOBAL PROPERTIES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#login-form-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+
+  background-color: var(--background-color-1);
+}

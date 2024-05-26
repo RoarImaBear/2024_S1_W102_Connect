@@ -1,11 +1,7 @@
 import React from "react";
 import SignUpForm from "./pages/SignUpForm";
 import LoginForm from "./pages/LoginForm";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from "./pages/profile";
 import Feed from "./pages/feed";
 import Matches from "./pages/Matches";

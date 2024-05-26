@@ -1,14 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
-import Header from "../components/AppHeader";
+import React, { useState } from "react";
 
 import { firestore } from "../firebase";
-import {
-  collection,
-  doc,
-  setDoc,
-  updateDoc,
-  onSnapshot,
-} from "@firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "@firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
 
 import { useFetchRealtimeCollection } from "../support-functions/importFunctions";
@@ -17,6 +10,8 @@ import { useFetchRealtimeCollection } from "../support-functions/importFunctions
 
 export default function FeedCarousel() {
   const location = "berlin";
+  // << dropDown component that changes location
+
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
   const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
@@ -28,20 +23,18 @@ export default function FeedCarousel() {
     "users"
   );
   const [currentIndex, setIndex] = useState(0);
-  const [profileFeed, setProfileFeed] = useState({});
-  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed);
+  const [profileFeed, setProfileFeed] = useState({}); // << Profile Collection
+  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed); // << Fetches Profiles
+
+  console.log(profileFeed);
 
   // Profile Card compoennt, displaying relevant user profile.
   function ProfileCard({ profile }) {
     return (
       <>
-        <div id="profile-card">
+        <div id="feed-profile-card">
           <h1>{profile?.data?.name}</h1>
-          <img
-            id="profile-picture"
-            src={profile?.data?.profilePicture}
-            alt=""
-          />
+          <img id="" src={profile?.data?.profilePicture} alt="" />
           <h4>{profile?.data?.age}</h4>
           <p>{profile?.data?.about}</p>
           <br />
@@ -52,22 +45,29 @@ export default function FeedCarousel() {
   }
 
   // Custom button that writes matchee to contacts and currentUser to corresponding matchee's contacts
+  // Time to make this actually work properly....
+
+  // 1. Add self to matchee.pendingMatches
+  // 2. Add matchee to ignoreList
+  // 3. AddButton triggers next profile.
+  // 4. handlePrevOrNext filters against ignoreList
+
   function AddButton({ matchee }) {
     const handleConnect = async () => {
-      const userContactsRef = doc(
+      const ignoreListRef = doc(
         profileCollectionRef,
-        `${userID}/matchmaking/contacts`
+        `${userID}/matchmakingFilters/ignoreList`
       );
       const matcheeContactsRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/matchmaking/contacts`
+        `${matchee?.id}/pendingContacts/${userID}`
       );
 
       try {
-        await updateDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+        await updateDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
       } catch (error) {
         if (error.code === "not-found") {
-          await setDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+          await setDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
         }
       }
 
@@ -81,7 +81,7 @@ export default function FeedCarousel() {
     };
 
     return (
-      <button onClick={() => handleConnect(matchee)}>
+      <button id="connect-button" onClick={() => handleConnect(matchee)}>
         <h3>Connect!</h3>
       </button>
     );
@@ -92,7 +92,14 @@ export default function FeedCarousel() {
     let profileCount = profileFeed.length;
     let newIndex = currentIndex + value;
 
-    if (newIndex < 0) {
+    if (profileFeed[newIndex]?.id === userID && value > 0) {
+      newIndex++;
+    }
+    if (profileFeed[newIndex]?.id === userID && value < 0) {
+      newIndex--;
+    }
+
+    if (newIndex <= 0) {
       newIndex = profileCount - 1;
     } else if (newIndex > profileCount - 1) {
       newIndex = 0;
@@ -103,17 +110,16 @@ export default function FeedCarousel() {
 
   return (
     <>
-      <section className="main-container">
-        <div id="feed-card">
-          <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
-            <h1>Prev</h1>
-          </button>
-          <ProfileCard profile={profileFeed[currentIndex]} />
-          <button id="big-button" onClick={() => handlePrevOrNext(1)}>
-            <h1>Next</h1>
-          </button>
-        </div>
-      </section>
+      {/* Add dropdown list of cities. London & Berlin */}
+      <div id="feed-carousel">
+        <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
+          <h1>Prev</h1>
+        </button>
+        <ProfileCard profile={profileFeed[currentIndex]} />
+        <button id="big-button" onClick={() => handlePrevOrNext(1)}>
+          <h1>Next</h1>
+        </button>
+      </div>
     </>
   );
 }

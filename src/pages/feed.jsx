@@ -1,8 +1,5 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Header from "../components/AppHeader";
-import { useAuth } from "../contexts/AuthContext";
-import { firestore } from "../firebase";
-import { collection, doc } from "@firebase/firestore";
 
 import FeedCarousel from "../components/FeedCarousel";
 
@@ -10,11 +7,10 @@ export default function Feed() {
   return (
     <>
       <Header />
-      <div>
-        <section className="main-container">
-          <FeedCarousel />
-        </section>
-      </div>
+      <div id="background"></div>
+      <section className="main-section" id="feed-main-section">
+        <FeedCarousel />
+      </section>
     </>
   );
 }
