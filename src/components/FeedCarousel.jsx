@@ -45,24 +45,29 @@ export default function FeedCarousel() {
   }
 
   // Custom button that writes matchee to contacts and currentUser to corresponding matchee's contacts
-
   // Time to make this actually work properly....
+
+  // 1. Add self to matchee.pendingMatches
+  // 2. Add matchee to ignoreList
+  // 3. AddButton triggers next profile.
+  // 4. handlePrevOrNext filters against ignoreList
+
   function AddButton({ matchee }) {
     const handleConnect = async () => {
-      const userContactsRef = doc(
+      const ignoreListRef = doc(
         profileCollectionRef,
-        `${userID}/contacts/${matchee?.id}`
+        `${userID}/matchmakingFilters/ignoreList`
       );
       const matcheeContactsRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/contacts/${userID}`
+        `${matchee?.id}/pendingContacts/${userID}`
       );
 
       try {
-        await updateDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+        await updateDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
       } catch (error) {
         if (error.code === "not-found") {
-          await setDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+          await setDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
         }
       }
 

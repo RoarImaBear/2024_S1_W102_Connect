@@ -17,6 +17,6 @@ const testDocRef = doc(
 
 test("should render a contact card match card if one exists", () => {
   render(<PendingContactCard userID={testDocRef} />);
-  const contactCard = screen.getByTestId("PendincContactCard");
+  const contactCard = screen.getByTestId("PendingContactCard");
   expect(contactCard).toBeInTheDocument();
 });

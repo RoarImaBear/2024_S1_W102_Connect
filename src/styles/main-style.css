@@ -250,3 +250,7 @@ div #feed-profile-card {
   cursor: pointer;
   border-bottom: 1px solid #dddddd35;
 }
+
+#pending-match-card {
+  background-color: goldenrod;
+}

@@ -9,6 +9,7 @@ import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
 
 import { useAuth } from "../contexts/AuthContext";
+import { PendingContactCard } from "../components/PendingContactCard";
 
 // Changes made to work with Firestore contacts collection -- ready for chat implementation
 function Matches() {
@@ -21,15 +22,22 @@ function Matches() {
     `accounts/${location}/users/${userID}/contacts`
   );
 
-  const [contactsCollection, setContactsCollection] = useState([]);
+  const pendingContactsColRef = collection(
+    firestore,
+    `accounts/${location}/users/${userID}/pendingContacts`
+  );
 
-  useFetchRealtimeCollection(contactsColRef, setContactsCollection);
+  const [contactsCol, setContactsCol] = useState([]);
+  const [pendingContactsCol, setPendingContactsCol] = useState([]);
+
+  useFetchRealtimeCollection(contactsColRef, setContactsCol);
+  useFetchRealtimeCollection(pendingContactsColRef, setPendingContactsCol);
 
   //convert contact objects into an array
 
-  console.log(contactsCollection);
+  console.log(contactsCol);
 
-  contactsCollection.map((contact, index) => {
+  contactsCol.map((contact, index) => {
     console.log(contact);
   });
 
@@ -38,7 +46,16 @@ function Matches() {
       <Header />
       <div id="background"></div>
       <section className="main-section">
-        {contactsCollection.map((contact, index) => (
+        {pendingContactsCol.map((contact, index) => (
+          <PendingContactCard
+            key={index}
+            contactDocRef={doc(
+              firestore,
+              `accounts/berlin/users/${contact?.id}`
+            )}
+          />
+        ))}
+        {contactsCol.map((contact, index) => (
           <ContactCard
             key={index}
             contactDocRef={doc(

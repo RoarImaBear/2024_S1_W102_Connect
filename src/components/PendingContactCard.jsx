@@ -22,9 +22,13 @@ export function PendingContactCard({ contactDocRef }) {
   }, []);
 
   return (
-    <div data-testid="contactCard" className="matches">
+    <div
+      data-testid="pendingContactCard"
+      id="pending-contact-card"
+      className="matches"
+    >
       {/* Display match contact information such as name, age and profile picture*/}
-      <div className="match-card img">
+      <div className="match-card img" id="pending-match-card">
         <h2>{contact?.name}</h2>
         {contact?.profilePicture && (
           <img src={contact?.profilePicture} alt="Profile" />
