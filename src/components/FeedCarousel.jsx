@@ -10,6 +10,8 @@ import { useFetchRealtimeCollection } from "../support-functions/importFunctions
 
 export default function FeedCarousel() {
   const location = "berlin";
+  // << dropDown component that changes location
+
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
   const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
@@ -21,8 +23,10 @@ export default function FeedCarousel() {
     "users"
   );
   const [currentIndex, setIndex] = useState(0);
-  const [profileFeed, setProfileFeed] = useState({});
-  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed);
+  const [profileFeed, setProfileFeed] = useState({}); // << Profile Collection
+  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed); // << Fetches Profiles
+
+  console.log(profileFeed);
 
   // Profile Card compoennt, displaying relevant user profile.
   function ProfileCard({ profile }) {
@@ -101,6 +105,7 @@ export default function FeedCarousel() {
 
   return (
     <>
+      {/* Add dropdown list of cities. London & Berlin */}
       <div id="feed-carousel">
         <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
           <h1>Prev</h1>
