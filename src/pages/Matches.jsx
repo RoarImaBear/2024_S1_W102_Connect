@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { collection, doc, onSnapshot } from "firebase/firestore";
-import { firestore } from "../firebase";
 import {
-  useFetchRealtimeCollection,
-  useFetchRealtimeDoc,
-} from "../support-functions/importFunctions"; // Import the useFetchRealtimeDoc hook
+  collection,
+  doc,
+  onSnapshot,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
+import { firestore } from "../firebase";
+import { useFetchRealtimeCollection } from "../support-functions/importFunctions";
 import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
 import Chat from "../components/Chat/chat";
 import { useAuth } from "../contexts/AuthContext";
 
-// Changes made to work with Firestore contacts collection -- ready for chat implementation
 function Matches() {
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
@@ -22,16 +24,36 @@ function Matches() {
   );
 
   const [contactsCollection, setContactsCollection] = useState([]);
+  const [chatMessages, setChatMessages] = useState([]);
 
   useFetchRealtimeCollection(contactsColRef, setContactsCollection);
 
-  //convert contact objects into an array
+  // Subscribe to the testChatroom
+  useEffect(() => {
+    const chatroomDocRef = doc(firestore, "chatrooms/testChatroom");
 
-  console.log(contactsCollection);
+    const unsubscribe = onSnapshot(chatroomDocRef, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        setChatMessages(data.messages || []);
+      } else {
+        console.log("No such document!");
+      }
+    });
 
-  contactsCollection.map((contact, index) => {
-    console.log(contact);
-  });
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
+
+  const handleSendMessage = async (message) => {
+    const chatroomDocRef = doc(firestore, "chatrooms/testChatroom");
+    await updateDoc(chatroomDocRef, {
+      messages: arrayUnion({
+        text: message,
+        createdAt: new Date(),
+        user: currentUser.displayName,
+      }),
+    });
+  };
 
   return (
     <>
@@ -50,7 +72,7 @@ function Matches() {
           ))}
         </div>
         <div className="chat-container">
-          <Chat />
+          <Chat messages={chatMessages} onSendMessage={handleSendMessage} />
         </div>
       </section>
     </>
@@ -58,37 +80,3 @@ function Matches() {
 }
 
 export default Matches;
-
-// const [contacts, setContacts] = useState({});
-// const [contact, setContact] = useState({});
-// const [contactsArray, setContactsArray] = useState([]);
-
-// useFetchRealtimeDoc(
-//   doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
-//   setContacts
-// );
-
-// Subscribe to changes for the "user" contact
-// useEffect(() => {
-//   if (contacts && contacts[userID]) {
-//     const unsubscribe = onSnapshot(contacts[userID], (doc) => {
-//       if (doc.exists) {
-//         const fetchedData = doc.data();
-//         setContact(fetchedData);
-//       } else {
-//         console.log("Failed to load doc");
-//       }
-//     }); //unsubscribe from listener
-//     return () => unsubscribe();
-//   }
-// }, [contacts]);
-
-// useEffect(() => {
-//   let outputArray = [];
-//   if (contacts) {
-//     outputArray = Object.values(contacts);
-//   }
-// for (const [key, value] of Object.entries(contacts))
-//   outputArray.push(value);
-//   setContactsArray(outputArray);
-// }, [contacts]);
