@@ -33,14 +33,6 @@ function Matches() {
   useFetchRealtimeCollection(contactsColRef, setContactsCol);
   useFetchRealtimeCollection(pendingContactsColRef, setPendingContactsCol);
 
-  //convert contact objects into an array
-
-  console.log(contactsCol);
-
-  contactsCol.map((contact, index) => {
-    console.log(contact);
-  });
-
   return (
     <>
       <Header />

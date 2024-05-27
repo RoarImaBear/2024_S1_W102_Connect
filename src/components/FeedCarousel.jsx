@@ -49,33 +49,47 @@ export default function FeedCarousel() {
 
   // 1. Add self to matchee.pendingMatches
   // 2. Add matchee to ignoreList
-  // 3. AddButton triggers next profile.
-  // 4. handlePrevOrNext filters against ignoreList
+  // 3. Add user to matchee's ignoreList
+  // 4. AddButton triggers next profile.
+  // 5. handlePrevOrNext filters against ignoreList
 
   function AddButton({ matchee }) {
     const handleConnect = async () => {
+      const matcheePendingRef = doc(
+        profileCollectionRef,
+        `${matchee?.id}/pendingContacts/${userID}`
+      );
       const ignoreListRef = doc(
         profileCollectionRef,
         `${userID}/matchmakingFilters/ignoreList`
       );
-      const matcheeContactsRef = doc(
+      const matcheeIgnoreListRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/pendingContacts/${userID}`
+        `${matchee?.id}/matchmakingFilters/ignoreList`
       );
 
+      // Add user to matchee's pendingContacts
+      try {
+        await updateDoc(matcheePendingRef, { [userID]: userProfileRef });
+      } catch (error) {
+        if (error.code === "not-found") {
+          await setDoc(matcheePendingRef, { [userID]: userProfileRef });
+        }
+      }
+
+      // Update ignoreLists
+      try {
+        await updateDoc(matcheeIgnoreListRef, { [userID]: userProfileRef });
+      } catch (error) {
+        if (error.code === "not-found") {
+          await setDoc(matcheeIgnoreListRef, { [userID]: userProfileRef });
+        }
+      }
       try {
         await updateDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
       } catch (error) {
         if (error.code === "not-found") {
           await setDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
-        }
-      }
-
-      try {
-        await updateDoc(matcheeContactsRef, { [userID]: userProfileRef });
-      } catch (error) {
-        if (error.code === "not-found") {
-          await setDoc(matcheeContactsRef, { [userID]: userProfileRef });
         }
       }
     };
