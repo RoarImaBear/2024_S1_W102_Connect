@@ -38,7 +38,8 @@ function InterestCheckbox({ interest }) {
   );
 }
 
-export function InterestSelect() {
+export function InterestSelect(userID, location) 
+{
   const userID = "test-user";
   const location = "berlin";
 
