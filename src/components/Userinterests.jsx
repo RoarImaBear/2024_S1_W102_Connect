@@ -28,7 +28,7 @@ async function removeInterestFromDB(interest) {
 function UserInterestButton({ interest }) {
   console.log("display1");
   return (
-    <div>
+    <div id ="profile-interests" style={{padding:"2px"}}>
       <button onClick={() => removeInterestFromDB(interest)}>{interest}</button>
     </div>
   );
@@ -38,7 +38,8 @@ export function Userinterests() {
   const [userInterestObject, setUserInterestObject] = useState({});
   const [profileDoc, setProfileDoc] = useState({});
 
-  const interestsRef = doc(
+  const interestsRef = doc
+  (
     firestore,
     `accounts/${location}/users/${userID}/user-interests/test`
   );
@@ -62,7 +63,7 @@ export function Userinterests() {
 
   return (
     <div id="user-interests">
-      <p>Your Interests</p>
+      <title>Your Interests</title>
       {trueInterestsArray.map((interest, index) => (
         <UserInterestButton key={index} interest={interest} />
       ))}

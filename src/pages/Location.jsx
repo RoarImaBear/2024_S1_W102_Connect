@@ -20,10 +20,7 @@ import { useFetchRealtimeDoc } from "../support-functions/importFunctions";
           <option location="not selected">pick a city</option>
           <option location="Berlin">Berlin</option>
           <option location="London">London</option>
-          <option location="Auckland">Auckland</option>
-          <option location="Los Angeles">Los Angeles</option>
-          <option location="New York">New York</option>
-          {locations.map((location, index) => (Options({ location })))}
+           {/* {locations.map((location, index) => (Options({ location })))} */}
         </select>
         </label>
         <br />

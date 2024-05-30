@@ -32,13 +32,13 @@ function InterestCheckbox({ interest }) {
   }
 
   return (
-    <div id="interest-checkbox">
+    <div id="interest-checkbox" style={{padding:"2px"}}>
       <button onClick={onClick}>{interest}</button>
     </div>
   );
 }
 
-export function InterestSelect(userID, location) 
+export function InterestSelect()
 {
   const userID = "test-user";
   const location = "berlin";
@@ -56,7 +56,7 @@ export function InterestSelect(userID, location)
 
   return (
     <div id="interest-options">
-      <p>Select Interests</p>
+      <title>Select Interests</title>
       {interestsKeyArray?.interests?.map((interest, index) => (
         <InterestCheckbox key={index} interest={interest} />
       ))}

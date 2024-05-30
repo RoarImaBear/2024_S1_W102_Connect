@@ -12,8 +12,8 @@ export default function Profile() {
       <div id="background"></div>
       <section className="main-section" id="profile-main-section">
         <AboutMe />
-        <Userinterests />
-        <InterestSelect />
+        <p> Your Interests: </p> <Userinterests/>
+        <p1>Select Your Interests: </p1> <div id= "SelectFromList"> <InterestSelect /> </div>
       </section>
     </>
   );
