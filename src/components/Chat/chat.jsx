@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./chat.css";
 import { firestore } from "../../firebase";
 
-export function Chat(/*should take in docRef/chatroomRef from contacts collection*/) {
+export function Chat({ chatroomRef }) {
   const [chat, setChat] = useState({});
   const [text, setText] = useState("");
   const { currentUser } = useAuth();
@@ -12,22 +12,24 @@ export function Chat(/*should take in docRef/chatroomRef from contacts collectio
 
   const endRef = useRef(null);
 
-  useEffect(()=>{
-    endRef.current?.scrollIntoView({behavior:"smooth"})
-  }, [chat?.messages]);
-
   //Fetches chatroom information when component mounts
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(firestore, "chats", "testChatRoom"), (res) => {
+    if (!chatroomRef) return;
+
+    const unsubscribe = onSnapshot(chatroomRef, (res) => {
       setChat(res.data());
     });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [chatroomRef]);
 
   console.log(text);
+
+  useEffect(()=>{
+    endRef.current?.scrollIntoView({behavior:"smooth"})
+  }, [chat?.messages]);
 
   return (
     <div className="chat">
