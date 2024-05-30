@@ -57,10 +57,12 @@ function Matches() {
 
       //Generate chatroom ID
       const chatroomID = generateChatroomID(userID, clickedUserID);
+      //Create participants array
+      const participants = [userID, clickedUserID];
 
-      //Create chatroom document
+      //Create chatroom document with participants field
       const newChatroomRef = doc(firestore, "chats", chatroomID);
-      await setDoc(newChatroomRef, {});
+      await setDoc(newChatroomRef, { participants });
 
       // Update chatroomRef in both users' contact documents
       await Promise.all([
