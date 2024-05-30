@@ -9,6 +9,7 @@ import Header from "../components/AppHeader";
 import { ContactCard } from "../components/ContactCard";
 import Chat from "../components/Chat/chat";
 import { useAuth } from "../contexts/AuthContext";
+import { PendingContactCard } from "../components/PendingContactCard";
 
 // Changes made to work with Firestore contacts collection -- ready for chat implementation
 function Matches() {
@@ -21,34 +22,40 @@ function Matches() {
     `accounts/${location}/users/${userID}/contacts`
   );
 
-  const [contactsCollection, setContactsCollection] = useState([]);
+  const pendingContactsColRef = collection(
+    firestore,
+    `accounts/${location}/users/${userID}/pendingContacts`
+  );
 
-  useFetchRealtimeCollection(contactsColRef, setContactsCollection);
+  const [contactsCol, setContactsCol] = useState([]);
+  const [pendingContactsCol, setPendingContactsCol] = useState([]);
 
-  //convert contact objects into an array
-
-  console.log(contactsCollection);
-
-  contactsCollection.map((contact, index) => {
-    console.log(contact);
-  });
+  useFetchRealtimeCollection(contactsColRef, setContactsCol);
+  useFetchRealtimeCollection(pendingContactsColRef, setPendingContactsCol);
 
   return (
     <>
       <Header />
       <div id="background"></div>
       <section className="main-section">
-        <div className="contacts-container">
-          {contactsCollection.map((contact, index) => (
-            <ContactCard
-              key={index}
-              contactDocRef={doc(
-                firestore,
-                `accounts/${location}/users/${contact?.id}`
-              )}
-            />
-          ))}
-        </div>
+        {pendingContactsCol.map((contact, index) => (
+          <PendingContactCard
+            key={index}
+            contactDocRef={doc(
+              firestore,
+              `accounts/berlin/users/${contact?.id}`
+            )}
+          />
+        ))}
+        {contactsCol.map((contact, index) => (
+          <ContactCard
+            key={index}
+            contactDocRef={doc(
+              firestore,
+              `accounts/berlin/users/${contact?.id}`
+            )}
+          />
+        ))}
         <div className="chat-container">
           <Chat />
         </div>

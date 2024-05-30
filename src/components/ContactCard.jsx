@@ -13,7 +13,6 @@ export function ContactCard({ contactDocRef }) {
         const fetchedData = doc.data();
         //updates the state with data fetched from firestore
         setContact(fetchedData);
-        console.log("fetched doc: ", fetchedData);
       } else {
         console.log("Failed to load doc");
       }
