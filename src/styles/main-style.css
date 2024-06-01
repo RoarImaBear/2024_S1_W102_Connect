@@ -17,6 +17,22 @@
   font-family: var(--font-main);
 }
 
+.icon-button {
+  background-color: rgba(177, 177, 177, 0.487);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.icon-button img {
+  margin-right: 8px;
+  width: 5px;
+  height: 5px;
+}
+
 /* HEADER STYLING */
 
 header {
@@ -257,4 +273,36 @@ div #feed-profile-card {
   padding: 20px;
   cursor: pointer;
   border-bottom: 1px solid #dddddd35;
+}
+
+#pending-match-card {
+  background-color: goldenrod;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  opacity: 0.5;
+}
+.icon-button#accept {
+  background-color: #95d8a8;
+}
+.icon-button#decline {
+  background-color: #b61818;
+}
+.icon-button:hover {
+  opacity: 1;
+}
+
+.icon-button img {
+  margin-left: 20px;
+  width: 30px;
+  height: 30px;
 }

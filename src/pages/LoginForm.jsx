@@ -51,6 +51,8 @@ const LoginForm = () => {
       setSuccessMessage("Login successful.");
       navigate("/profile");
     } catch (err) {
+      setEmail("");
+      setPassword("");
       if (err.code === "auth/invalid-credential") {
         // Invalid credential
         setError("Invalid credential, please verify your inputs");
@@ -70,6 +72,8 @@ const LoginForm = () => {
       } else {
         setError(err.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 

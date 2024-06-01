@@ -3,7 +3,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../firebase";
 
 //functional component contact card taking in user ID for fetching contact information
-export function ContactCard({ contactDocRef }) {
+export function ContactCard({ contactDocRef, onClick }) {
   const [contact, setContact] = useState({});
 
   //fetches contact information when component mounts
@@ -13,7 +13,6 @@ export function ContactCard({ contactDocRef }) {
         const fetchedData = doc.data();
         //updates the state with data fetched from firestore
         setContact(fetchedData);
-        console.log("fetched doc: ", fetchedData);
       } else {
         console.log("Failed to load doc");
       }
@@ -22,7 +21,7 @@ export function ContactCard({ contactDocRef }) {
   }, []);
 
   return (
-    <div data-testid="contactCard" className="matches">
+    <div data-testid="contactCard" className="matches" onClick={onClick}>
       {/* Display match contact information such as name, age and profile picture*/}
       <div className="match-card img">
         <h2>{contact?.name}</h2>

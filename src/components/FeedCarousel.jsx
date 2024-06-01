@@ -10,6 +10,8 @@ import { useFetchRealtimeCollection } from "../support-functions/importFunctions
 
 export default function FeedCarousel() {
   const location = "berlin";
+  // << dropDown component that changes location
+
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
   const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
@@ -21,8 +23,10 @@ export default function FeedCarousel() {
     "users"
   );
   const [currentIndex, setIndex] = useState(0);
-  const [profileFeed, setProfileFeed] = useState({});
-  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed);
+  const [profileFeed, setProfileFeed] = useState({}); // << Profile Collection
+  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed); // << Fetches Profiles
+
+  console.log(profileFeed);
 
   // Profile Card compoennt, displaying relevant user profile.
   function ProfileCard({ profile }) {
@@ -41,32 +45,51 @@ export default function FeedCarousel() {
   }
 
   // Custom button that writes matchee to contacts and currentUser to corresponding matchee's contacts
-
   // Time to make this actually work properly....
+
+  // 1. Add self to matchee.pendingMatches
+  // 2. Add matchee to ignoreList
+  // 3. Add user to matchee's ignoreList
+  // 4. AddButton triggers next profile.
+  // 5. handlePrevOrNext filters against ignoreList
+
   function AddButton({ matchee }) {
     const handleConnect = async () => {
-      const userContactsRef = doc(
+      const matcheePendingRef = doc(
         profileCollectionRef,
-        `${userID}/contacts/${matchee?.id}`
+        `${matchee?.id}/pendingContacts/${userID}`
       );
-      const matcheeContactsRef = doc(
+      const ignoreListRef = doc(
         profileCollectionRef,
-        `${matchee?.id}/contacts/${userID}`
+        `${userID}/matchmakingFilters/ignoreList`
+      );
+      const matcheeIgnoreListRef = doc(
+        profileCollectionRef,
+        `${matchee?.id}/matchmakingFilters/ignoreList`
       );
 
+      // Add user to matchee's pendingContacts
       try {
-        await updateDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+        await updateDoc(matcheePendingRef, { [userID]: userProfileRef });
       } catch (error) {
         if (error.code === "not-found") {
-          await setDoc(userContactsRef, { [matchee?.id]: matchee?.ref });
+          await setDoc(matcheePendingRef, { [userID]: userProfileRef });
         }
       }
 
+      // Update ignoreLists
       try {
-        await updateDoc(matcheeContactsRef, { [userID]: userProfileRef });
+        await updateDoc(matcheeIgnoreListRef, { [userID]: userProfileRef });
       } catch (error) {
         if (error.code === "not-found") {
-          await setDoc(matcheeContactsRef, { [userID]: userProfileRef });
+          await setDoc(matcheeIgnoreListRef, { [userID]: userProfileRef });
+        }
+      }
+      try {
+        await updateDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
+      } catch (error) {
+        if (error.code === "not-found") {
+          await setDoc(ignoreListRef, { [matchee?.id]: matchee?.ref });
         }
       }
     };
@@ -101,6 +124,7 @@ export default function FeedCarousel() {
 
   return (
     <>
+      {/* Add dropdown list of cities. London & Berlin */}
       <div id="feed-carousel">
         <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
           <h1>Prev</h1>
