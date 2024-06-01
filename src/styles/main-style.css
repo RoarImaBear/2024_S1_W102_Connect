@@ -1,12 +1,26 @@
 /* VARIABLES */
 :root {
-  --background-1: rgba(242, 242, 242, 0.94);
-  --background-2: rgba(242, 242, 242, 0.95);
-  --button-background-1: rgb(154, 181, 229);
+  --background-1: rgba(230, 243, 246, 0.95);
+  --background-2: rgba(197, 228, 236, 0.95);
+  --background-: rgba(197, 228, 236, 0.95);
+  --background-gradient-top: rgba(227, 246, 250, 0.95);
+  --background-gradient-bottom: rgba(215, 243, 247, 0.9);
+
+  --button-background-1: rgba(165, 209, 220, 0.95);
+  --button-background-2: rgba(94, 146, 209, 0.487);
+  --button-background-3: rgba(165, 209, 220, 0.95);
+
+  --card-background-1: rgb(46, 92, 190);
 
   --header-height: 11vh;
 
   --font-main: Arial, sans-serif;
+  --font-color-1: rgb(240, 240, 240);
+  --font-color-2: rgba(113, 217, 184, 0.628);
+  --font-color-3: rgb(65, 201, 176);
+  --font-color-4: rgb(65, 201, 176);
+  --font-color-hover: rgb(113, 217, 184);
+  --font-color-active: rgb(71, 80, 201);
 }
 
 /* GLOBAL PROPERTIES */
@@ -17,8 +31,12 @@
   font-family: var(--font-main);
 }
 
+h2 {
+  font-size: 1.5rem;
+}
+
 .icon-button {
-  background-color: rgba(177, 177, 177, 0.487);
+  background-color: var(--button-background-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +54,12 @@
 /* HEADER STYLING */
 
 header {
-  background-color: var(--background-2);
+  /* background-color: var(--background-2); */
+  background: linear-gradient(
+    to bottom,
+    var(--background-gradient-bottom),
+    var(--background-gradient-top)
+  );
   padding: 1px;
   position: fixed;
   z-index: 1000;
@@ -45,24 +68,60 @@ header {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+header #connect {
+  color: var(--font-color-3);
+  padding: 0;
+  position: fixed;
+  top: 20px;
+  left: 60px;
+  z-index: 999;
+}
+
 header #logo-link {
   position: relative;
-  background-image: url("/src/images/globe-icon.svg");
+  background-image: url("/src/images/globe-icon-active.svg");
   background-size: auto;
   background-position: center;
   background-repeat: no-repeat;
   width: 60px;
+}
+
+header #logo-link:hover {
+  width: 61px;
 }
 header #logo-link a {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 80px;
+  font-size: 0.8rem;
+}
+
+header #logo-link a.active {
+  color: white;
+  position: relative;
+  background-image: url("/src/images/globe-icon-active.svg");
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60px;
 }
 
 header a {
   text-decoration: none;
+  color: var(--font-color-2);
+  font-weight: 600;
+  font-size: 1rem;
+}
+header a:hover {
+  color: var(--font-color-hover);
+  font-size: 1.02rem;
+}
+
+header ul li a.active {
+  color: var(--font-color-active);
+  font-size: 1.1rem;
 }
 
 header ul {
@@ -73,6 +132,15 @@ header ul {
 
 header li {
   padding: 2%;
+}
+
+header #logout-button {
+  background-color: var(--button-background-1);
+  border: none;
+}
+header #logout-button:hover {
+  background-color: var(--button-background-2);
+  border: none;
 }
 
 header li:first-child {
@@ -92,6 +160,9 @@ header li:last-child {
   width: 100vw;
   height: 100vh;
   background-image: url("/src/images/global-background.png");
+  filter: blur(2px);
+  opacity: 80%;
+  filter: brightness(105%);
   background-size: cover;
   background-position: center;
 }
@@ -99,11 +170,17 @@ header li:last-child {
 .main-section {
   position: relative;
   z-index: 100;
-  background: var(--background-1);
+  background: linear-gradient(
+    to bottom,
+    var(--background-gradient-top),
+    var(--background-gradient-bottom)
+  );
   width: 60vw;
+  height: 89vh;
   margin-left: auto;
   margin-right: auto;
   padding: 2px;
+  border-radius: 8px;
   transform: translateY(calc(var(--header-height)));
   display: flex;
 }
@@ -158,7 +235,12 @@ header li:last-child {
 }
 
 div #quick-edit {
+  background-color: var(--background-2);
+  color:var();
   min-height: 1rem;
+  min-width: 10vw;
+  padding: 1vh 15vh 1vh 1vh;
+
 }
 
 /* FEED PAGE STYLING */
@@ -189,37 +271,43 @@ div #feed-profile-card {
 }
 
 #feed-carousel #big-button {
+  color: var(--font-color-1);
   border: none;
-  background-color: var(--button-background-1);
+  background-color: var(--button-background-3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   flex: 1;
+}
+#feed-carousel #big-button:hover {
+  background-color: var(--button-background-2);
 }
 
 #feed-carousel #connect-button {
+  color: var(--font-color-1);
   border: none;
-  background-color: var(--button-background-1);
+  padding: 0.5rem 2rem 0.2rem 2rem;
+  background-color: var(--button-background-3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#feed-carousel #connect-button:hover {
+  background-color: var(--button-background-2);
+}
+
+#feed-profile-card {
+  color: var(--font-color-4);
+  background-color: var(--background-3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #feed-profile-card img {
   width: 200px;
+  border-radius: 50px;
+
   overflow: hidden;
 }
 
 /* MATCHES PAGE STYLING */
 /* 
-.purple-container {
-  width: auto;
-  height: 85vh;
-  background-color: rgba(17, 25, 40, 0.75);
-  margin: 0 auto;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(19px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.125);
-} */
 
 .contacts-container {
   display: flex;
@@ -240,7 +328,7 @@ div #feed-profile-card {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
-  background-color: #2e5cbe;
+  background-color: var(--card-background-1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: left;
   justify-content: space-between;
@@ -257,12 +345,12 @@ div #feed-profile-card {
 .match-card h2 {
   margin-top: 0;
   margin-bottom: 10px;
-  color: white;
+  color: var(--font-color-1);
 }
 
 .match-card p {
   margin: 0;
-  color: white;
+  color: var(--font-color-1);
   align-self: center;
 }
 
