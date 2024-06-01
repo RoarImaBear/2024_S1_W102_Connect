@@ -105,6 +105,7 @@ header li:last-child {
   margin-right: auto;
   padding: 2px;
   transform: translateY(calc(var(--header-height)));
+  display: flex;
 }
 
 /* PROFILE PAGE STYLING */
@@ -204,7 +205,7 @@ div #feed-profile-card {
 }
 
 /* MATCHES PAGE STYLING */
-
+/* 
 .purple-container {
   width: auto;
   height: 85vh;
@@ -218,41 +219,51 @@ div #feed-profile-card {
   align-items: center;
   backdrop-filter: blur(19px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.125);
-}
+} */
 
-.match-container {
+.contacts-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+}
+.chat-container {
+  display: flex;
+  flex: 3;
+  flex-direction: column;
 }
 
 /* Match card */
 .match-card {
-  width: auto;
+  display: flex;
+  flex: 1;
+  align-items: center;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px;
   background-color: #2e5cbe;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  justify-content: center;
+  justify-content: left;
+  justify-content: space-between;
 }
 
 .match-card img {
-  width: 100px;
-  height: 100px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 20px;
+  align-self: center;
 }
 
-.match-card h3 {
+.match-card h2 {
   margin-top: 0;
   margin-bottom: 10px;
+  color: white;
 }
 
 .match-card p {
   margin: 0;
+  color: white;
+  align-self: center;
 }
 
 .item {
