@@ -118,7 +118,7 @@ const LoginForm = () => {
                 disabled={loading}
               />
               <button
-                className="btn btn-outline-secondary"
+                className="btn btn-outline-secondary logut-login-buttons"
                 type="button"
                 onClick={handleTogglePassword}
               >

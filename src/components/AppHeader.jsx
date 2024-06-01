@@ -5,7 +5,7 @@ import LogoutButton from "./LogoutButton";
 export function Header() {
   return (
     <header>
-      <h1 id="connect">Connect</h1>
+      <h1 id="connect">connect</h1>
       <ul>
         <li id="invisible-child"></li>
         <li>
