@@ -1,5 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  Timestamp,
+  arrayUnion,
+  doc,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 import "./chat.css";
 import { firestore } from "../../firebase";
@@ -31,7 +39,9 @@ export function Chat({ chatroomRef }) {
   useEffect(() => {
     const fetchCurrentUserData = async () => {
       try {
-        const userDoc = await getDoc(doc(firestore, "accounts/berlin/users", currentUserID));
+        const userDoc = await getDoc(
+          doc(firestore, "accounts/berlin/users", currentUserID)
+        );
         if (userDoc.exists()) {
           setCurrentUserData(userDoc.data());
         } else {
@@ -54,9 +64,11 @@ export function Chat({ chatroomRef }) {
         const chatroomSnapshot = await getDoc(chatroomRef);
         const participants = chatroomSnapshot.data().participants;
         // Find the user ID of the other participant
-        const recipientUserID = participants.find(id => id !== currentUserID); 
+        const recipientUserID = participants.find((id) => id !== currentUserID);
 
-        const userDoc = await getDoc(doc(firestore, "accounts/berlin/users", recipientUserID));
+        const userDoc = await getDoc(
+          doc(firestore, "accounts/berlin/users", recipientUserID)
+        );
         if (userDoc.exists()) {
           setRecipientUserData(userDoc.data());
         } else {
@@ -72,15 +84,36 @@ export function Chat({ chatroomRef }) {
 
   console.log(text);
 
-  useEffect(()=>{
-    endRef.current?.scrollIntoView({behavior:"smooth"})
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat?.messages]);
+
+  //handles messaging capability
+  const handleSendMessage = async () => {
+    if (text.trim() === "") return;
+
+    const newMessage = {
+      senderID: currentUserID,
+      messageContent: text,
+      timeSent: Timestamp.now(),
+    };
+
+    try {
+      await updateDoc(chatroomRef, {
+        messages: arrayUnion(newMessage),
+      });
+
+      setText("");
+    } catch (error) {
+      console.error("Error sending message: " + error);
+    }
+  };
 
   return (
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src={recipientUserData?.profilePicture} alt=""/>
+          <img src={recipientUserData?.profilePicture} alt="" />
           <div className="texts">
             <span>{recipientUserData?.name}</span>
             <p>{recipientUserData?.about}</p>
@@ -89,17 +122,26 @@ export function Chat({ chatroomRef }) {
       </div>
       <div className="center">
         {chat?.messages?.map((message, index) => (
-          <div 
+          <div
             key={index}
-            className={message.senderID === currentUserID ? "message own" : "message"}
+            className={
+              message.senderID === currentUserID ? "message own" : "message"
+            }
           >
-            <img src={message.senderID === currentUserID ? currentUserData?.profilePicture : recipientUserData?.profilePicture} alt=""/>
+            <img
+              src={
+                message.senderID === currentUserID
+                  ? currentUserData?.profilePicture
+                  : recipientUserData?.profilePicture
+              }
+              alt=""
+            />
             <div className="texts">
-              <p>
-                {message.messageContent}
-              </p>
+              <p>{message.messageContent}</p>
               <span>
-                {new Date(message.timeSent?.seconds * 1000).toLocaleTimeString()}
+                {new Date(
+                  message.timeSent?.seconds * 1000
+                ).toLocaleTimeString()}
               </span>
             </div>
           </div>
@@ -107,15 +149,17 @@ export function Chat({ chatroomRef }) {
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
-        <input  
-        type="text" 
-        placeholder="Type a message..." 
-        onChange={e => setText(e.target.value)} 
+        <input
+          type="text"
+          placeholder="Type a message..."
+          onChange={(e) => setText(e.target.value)}
         />
-        <button className="sendButton">Send</button>
+        <button className="sendButton" onClick={handleSendMessage}>
+          Send
+        </button>
       </div>
     </div>
   );
-};
+}
 
 export default Chat;
