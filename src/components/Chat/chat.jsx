@@ -108,6 +108,12 @@ export function Chat({ chatroomRef }) {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendMessage();
+    }
+  };
+
   return (
     <div className="chat">
       <div className="top">
@@ -153,6 +159,7 @@ export function Chat({ chatroomRef }) {
           placeholder="Type a message..."
           value={text}
           onChange={(e) => setText(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
         <button className="sendButton" onClick={handleSendMessage}>
           Send

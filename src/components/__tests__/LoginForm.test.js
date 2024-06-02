@@ -72,8 +72,10 @@ describe("LoginForm", () => {
     });
   });
 
-  it('resets input fields on error', async () => {
-    const mockLogin = jest.fn().mockRejectedValue(new Error('Invalid credential'));
+  it("resets input fields on error", async () => {
+    const mockLogin = jest
+      .fn()
+      .mockRejectedValue(new Error("Invalid credential"));
     const mockUseAuth = jest.fn().mockReturnValue({ login: mockLogin });
     useAuth.mockReturnValue(mockUseAuth);
 
@@ -83,18 +85,18 @@ describe("LoginForm", () => {
       </MemoryRouter>
     );
 
-    const emailInput = getByLabelText('Email address');
-    const passwordInput = getByLabelText('Password');
-    const loginButton = getByRole('button', { name: 'Login' });
+    const emailInput = getByLabelText("Email address");
+    const passwordInput = getByLabelText("Password");
+    const loginButton = getByRole("button", { name: "Login" });
 
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(loginButton);
 
     await waitFor(() => {
       expect(mockLogin).toHaveBeenCalledTimes(1);
-      expect(emailInput.value).toBe('');
-      expect(passwordInput.value).toBe('');
+      expect(emailInput.value).toBe("");
+      expect(passwordInput.value).toBe("");
     });
   });
 });
