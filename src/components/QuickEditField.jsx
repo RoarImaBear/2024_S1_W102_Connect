@@ -12,7 +12,6 @@ export function QuickEditField({ data, fieldName, docRef }) {
   // Updates the database for specified field
   const handleUpdateSubmit = async () => {
     let newValue = inputValue;
-
     try {
       await updateDoc(docRef, { [fieldName]: newValue });
     } catch (error) {
@@ -32,19 +31,32 @@ export function QuickEditField({ data, fieldName, docRef }) {
   let field;
   if (editable) {
     field = (
-      <div id="quick-edit" onClick={() => setEditable(!editable)}>
+      <div
+        id="quick-edit"
+        onClick={() => {
+          setEditable(!editable);
+        }}
+      >
         <input
           id="field"
           value={inputValue}
           onChange={handleChange}
-          onClick={(event) => event.stopPropagation()} // stops click event form propagating to parent div
+          onClick={(event) => {
+            event.stopPropagation();
+          }} // stops click event form propagating to parent div
         />
         <button onClick={handleUpdateSubmit}>Submit</button>
       </div>
     );
   } else {
     field = (
-      <div id="quick-edit" onClick={() => setEditable(!editable)}>
+      <div
+        id="quick-edit"
+        onClick={() => {
+          setEditable(!editable);
+          setInputValue(data);
+        }}
+      >
         {data ? data : "..."}
       </div>
     );

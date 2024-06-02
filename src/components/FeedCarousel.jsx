@@ -126,12 +126,16 @@ export default function FeedCarousel() {
     <>
       {/* Add dropdown list of cities. London & Berlin */}
       <div id="feed-carousel">
-        <button id="big-button" onClick={() => handlePrevOrNext(-1)}>
-          <h1>Prev</h1>
+        <button
+          className="big-button"
+          id="big-button-left"
+          onClick={() => handlePrevOrNext(-1)}
+        >
+          <h1>🛫</h1>
         </button>
         <ProfileCard profile={profileFeed[currentIndex]} />
-        <button id="big-button" onClick={() => handlePrevOrNext(1)}>
-          <h1>Next</h1>
+        <button className="big-button" onClick={() => handlePrevOrNext(1)}>
+          <h1>🛫</h1>
         </button>
       </div>
     </>

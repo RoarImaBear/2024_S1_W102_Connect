@@ -13,6 +13,12 @@ global.TextDecoder = TextDecoder;
 
 const testDocRef = doc(firestore, "accounts/berlin/users/test-user");
 
+jest.mock("../../contexts/AuthContext", () => ({
+  useAuth: () => ({
+    currentUser: { uid: "test-user" },
+  }),
+}));
+
 test("should render a contact card match card if one exists", () => {
   render(<PendingContactCard userID={testDocRef} />);
   const contactCard = screen.getByTestId("PendingContactCard");
@@ -20,11 +26,6 @@ test("should render a contact card match card if one exists", () => {
 });
 
 // // Mock the useAuth hook
-// jest.mock("../../contexts/AuthContext", () => ({
-//   useAuth: () => ({
-//     currentUser: { uid: "test-user" },
-//   }),
-// }));
 
 // // Mock the useFetchRealtimeDoc function
 // jest.mock("../../support-functions/importFunctions", () => ({
