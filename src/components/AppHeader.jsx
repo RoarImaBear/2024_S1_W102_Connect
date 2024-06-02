@@ -1,20 +1,25 @@
 import "../styles/main-style.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
 
 export function Header() {
   return (
     <header>
+      <h1 id="connect">connect</h1>
       <ul>
         <li id="invisible-child"></li>
         <li>
-          <Link to="/matches">Matches</Link>
+          <NavLink exact to="/matches" activeClassName="active">
+            Matches
+          </NavLink>
         </li>
         <li id="logo-link">
-          <Link to="/feed"></Link>
+          <NavLink exact to="/feed" activeClassName="active">✈</NavLink>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <NavLink exact to="/profile" activeClassName="active">
+            Profile
+          </NavLink>
         </li>
         <li>
           <LogoutButton />
