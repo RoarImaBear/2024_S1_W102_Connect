@@ -29,7 +29,12 @@ function UserInterestButton({ interest }) {
   console.log("display1");
   return (
     <div>
-      <button onClick={() => removeInterestFromDB(interest)}>{interest}</button>
+      <button
+        id="active-interest-button"
+        onClick={() => removeInterestFromDB(interest)}
+      >
+        {interest}
+      </button>
     </div>
   );
 }
