@@ -110,7 +110,7 @@ export function PendingContactCard({ contactDocRef }) {
 
   return (
     <div
-      data-testid="pendingContactCard"
+      data-testid="PendingContactCard"
       id="pending-contact-card"
       className="matches"
     >
