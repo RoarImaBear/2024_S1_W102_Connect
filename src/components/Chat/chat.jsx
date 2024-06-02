@@ -102,7 +102,6 @@ export function Chat({ chatroomRef }) {
       await updateDoc(chatroomRef, {
         messages: arrayUnion(newMessage),
       });
-
       setText("");
     } catch (error) {
       console.error("Error sending message: " + error);
@@ -152,6 +151,7 @@ export function Chat({ chatroomRef }) {
         <input
           type="text"
           placeholder="Type a message..."
+          value={text}
           onChange={(e) => setText(e.target.value)}
         />
         <button className="sendButton" onClick={handleSendMessage}>
