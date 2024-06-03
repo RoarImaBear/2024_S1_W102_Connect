@@ -1,15 +1,8 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { Chat } from "../Chat/chat"; // Corrected import for Chat component
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import { onSnapshot } from "firebase/firestore";
+import Chat from "../Chat/chat.jsx"; // Adjust the import based on your file structure
 import { useAuth } from "../../contexts/AuthContext";
-import {
-  doc,
-  getDoc,
-  updateDoc,
-  Timestamp,
-  arrayUnion,
-  onSnapshot,
-} from "firebase/firestore";
 
 // Mock Firestore functions
 jest.mock("firebase/firestore", () => ({
@@ -43,7 +36,7 @@ describe("Chat component", () => {
 
     // Mock Firestore getDoc for user data
     getDoc.mockImplementation(async (docRef) => {
-      if (docRef.path === "accounts/berlin/users/testUserId") {
+      if (docRef.path === "accounts/berlin/users/uid") {
         return {
           exists: true,
           data: () => ({
@@ -52,7 +45,7 @@ describe("Chat component", () => {
             about: "About Test User",
           }),
         };
-      } else if (docRef.path === "accounts/berlin/users/recipientUserId") {
+      } else if (docRef.path === "accounts/berlin/users/uid") {
         return {
           exists: true,
           data: () => ({
