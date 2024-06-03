@@ -1,17 +1,49 @@
+/* VARIABLES */
+:root {
+  --background-1: rgba(230, 243, 246, 0.95);
+  --background-2: rgba(197, 228, 236, 0.95);
+  --message-bg-user: rgba(197, 228, 236, 0.95);
+  --background-gradient-top: rgba(226, 244, 248, 0.95);
+  --background-gradient-bottom: rgba(215, 243, 247, 0.9);
+
+  --button-background-1: rgba(165, 209, 220, 0.95);
+  --message-bg-contact: rgba(94, 146, 209, 0.5);
+  --button-background-3: rgba(165, 209, 220, 0.95);
+  --interest-button-background-1: rgba(94, 146, 209, 0.5);
+  --interest-button-background-2: rgba(252, 252, 252, 0.636);
+
+  --card-background-1: rgb(46, 92, 190);
+
+  --header-height: 11vh;
+
+  --font-main: Arial, sans-serif;
+  --font-color-1: rgb(240, 240, 240);
+  --font-color-2: rgba(113, 217, 184, 0.628);
+  --font-color-3: rgb(65, 201, 176);
+  --font-color-4: rgba(94, 146, 209, 0.6);
+  --font-color-5: rgba(39, 65, 96, 0.9);
+  --font-color-hover: rgb(113, 217, 184);
+  --font-color-active: rgb(62, 109, 212);
+}
+
 .chat {
   flex: 2;
-  border-left: 1px solid #dddddd35;
-  border-right: 1px solid #dddddd35;
+  color: var(--font-color-5);
+  background-color: var(--background-1);
+  border-left: 1px solid var(--background-2);
+  border-right: 1px solid var(--background-2);
+  border-radius: 1rem;
   height: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0.5rem 1rem;
 
   .top {
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #dddddd35;
+    border-bottom: 1px solid var(--background-2);
 
     .user {
       display: flex;
@@ -38,7 +70,7 @@
         p {
           font-size: 14px;
           font-weight: 300;
-          color: #a5a5a5;
+          color: var(--font-color-5);
         }
       }
     }
@@ -72,7 +104,7 @@
 
         .texts {
           p {
-            background-color: #5183fe;
+            background-color: var(--message-bg-user);
           }
         }
       }
@@ -98,7 +130,7 @@
 
         p {
           padding: 20px;
-          background-color: rgba(17, 25, 40, 0.3);
+          background-color: var(--message-bg-contact);
           border-radius: 10px;
         }
 
@@ -114,7 +146,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid #dddddd35;
+    border-top: 0.7px solid var(--background-2);
     gap: 20px;
     margin-top: auto;
 
@@ -131,13 +163,12 @@
 
     input {
       flex: 1;
-      background-color: rgba(17, 25, 40, 0.5);
+      background-color: var(--background-2);
       border: none;
       outline: none;
-      color: white;
       padding: 20px;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15px;
 
       &:disabled {
         cursor: not-allowed;
@@ -155,17 +186,22 @@
     }
 
     .sendButton {
-      background-color: #5183fe;
-      color: white;
+      background-color: var(--card-background-1);
+      color: var(--font-color-1);
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
 
       &:disabled {
-        background-color: #5182feb4;
+        background-color: var(--card-background-1);
         cursor: not-allowed;
       }
+    }
+    .sendButton:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
 }
