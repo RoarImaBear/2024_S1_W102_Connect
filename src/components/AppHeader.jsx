@@ -9,15 +9,17 @@ export function Header() {
       <ul>
         <li id="invisible-child"></li>
         <li>
-          <NavLink exact to="/matches" activeClassName="active">
+          <NavLink to="/matches" activeclassname="active">
             Matches
           </NavLink>
         </li>
         <li id="logo-link">
-          <NavLink exact to="/feed" activeClassName="active">✈</NavLink>
+          <NavLink to="/feed" activeclassname="active">
+            ✈
+          </NavLink>
         </li>
         <li>
-          <NavLink exact to="/profile" activeClassName="active">
+          <NavLink to="/profile" activeclassname="active">
             Profile
           </NavLink>
         </li>
