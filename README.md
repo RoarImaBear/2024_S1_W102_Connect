@@ -1,6 +1,6 @@
 # Welcome to Connect!
 
-Connect is a social networking platform designed to connect travellers with locals. Developed by Sebastian Dymanski, Azel Saralaeva, Phoebe Sunata and James Hodder, it's the seed of a future Fortune500 and hopefully an 'A'.
+Connect is a social networking platform designed to connect travellers with locals. Developed by Sebastian Dymanski, Azel Saralaeva, Phoebe Sunata and James Hodder, it's the seed of a future Fortune500 and hopefully an 'A+'.
 
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -12,6 +12,10 @@ Bootstrapped with [Create React App](https://github.com/facebook/create-react-ap
 > update your profile in the profile tab, using a url for the profile picture
 > feed page allows you to "connect" with other users and choose from possible users
 > matches page shows your current matches
+> When clicking on a "Match" card it will open up "Messages" with that specific User
+> "Enter" or click "Send" for you to be able to message the Match
+>
+> - or - (accept or decline) user match request
 
 ## Available Scripts
 
