@@ -107,7 +107,7 @@ export function Chat({ chatroomRef }) {
       console.error("Error sending message: " + error);
     }
   };
-
+  // when User presses "Enter" their message gets sent
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       handleSendMessage();
