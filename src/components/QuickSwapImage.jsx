@@ -29,9 +29,8 @@ export function QuickSwapImage({ data, fieldName, docRef }) {
   let field;
   if (editable) {
     field = (
-      <div onClick={() => setEditable(!editable)}>
+      <div id="quick-edit" onClick={() => setEditable(!editable)}>
         <input
-          id="input-field"
           value={imageURL}
           onChange={handleChange}
           onClick={(event) => event.stopPropagation()}
