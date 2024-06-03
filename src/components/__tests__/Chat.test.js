@@ -11,14 +11,14 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
 const mockChatroomRef = doc(firestore, "accounts/berlin/users/test-user");
-
+//mock auth
 jest.mock("../../contexts/AuthContext", () => ({
   useAuth: () => ({
     currentUser: { uid: "test-user" },
   }),
 }));
 
-// The actual test
+// testing sending message
 test("You should send a message", async () => {
   render(<Chat chatroomRef={mockChatroomRef} />);
 
@@ -26,7 +26,7 @@ test("You should send a message", async () => {
   const input = screen.getByPlaceholderText("Type a message...");
   const sendButton = screen.getByText("Send");
 
-  fireEvent.change(input, { target: { value: "Hello, World!" } });
+  fireEvent.change(input, { target: { value: "testing testing 123" } });
   fireEvent.click(sendButton);
 
   // Wait for the updateDoc call
@@ -35,7 +35,7 @@ test("You should send a message", async () => {
       messages: expect.arrayContaining([
         expect.objectContaining({
           senderID: "test-user",
-          messageContent: "Hello, World!",
+          messageContent: "testing testing 123",
           timeSent: expect.any(Object),
         }),
       ]),
