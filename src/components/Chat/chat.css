@@ -1,4 +1,4 @@
-/* VARIABLES */
+/* Define CSS variables for easy theming and reuse */
 :root {
   --background-1: rgba(230, 243, 246, 0.95);
   --background-2: rgba(197, 228, 236, 0.95);
@@ -26,6 +26,7 @@
   --font-color-active: rgb(62, 109, 212);
 }
 
+/* Styles for the chat component */
 .chat {
   flex: 2;
   color: var(--font-color-5);

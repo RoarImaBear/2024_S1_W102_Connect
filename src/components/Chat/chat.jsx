@@ -84,6 +84,7 @@ export function Chat({ chatroomRef }) {
 
   console.log(text);
 
+  //handles scrolling into the latest message when user clicks on chat
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat?.messages]);
@@ -99,10 +100,11 @@ export function Chat({ chatroomRef }) {
     };
 
     try {
+      // Update the chatroom with the new message
       await updateDoc(chatroomRef, {
         messages: arrayUnion(newMessage),
       });
-      setText("");
+      setText(""); // Clear the text input
     } catch (error) {
       console.error("Error sending message: " + error);
     }
