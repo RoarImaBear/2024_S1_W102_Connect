@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   collection,
   doc,
-  onSnapshot,
   setDoc,
   updateDoc,
   deleteDoc,
@@ -13,8 +12,7 @@ import plusIcon from "../images/plus-icon.svg";
 import declineIcon from "../images/decline-icon.svg";
 import { useAuth } from "../contexts/AuthContext";
 
-// GET DESIRED LOCATION TO FETCH DYNAMICALLY
-
+// Functinoal component that displays the user profiles stored in PendingContact collection
 export function PendingContactCard({ contactDocRef }) {
   const profileCollectionRef = collection(
     firestore,
@@ -24,18 +22,10 @@ export function PendingContactCard({ contactDocRef }) {
   );
   const [contact, setContact] = useState({});
   const { currentUser } = useAuth();
+
+  // Current user variables
   const userID = currentUser.uid;
   const userDocRef = doc(profileCollectionRef, userID);
-
-  useFetchRealtimeDoc(contactDocRef, setContact);
-
-  const matcheeNewContactRef = doc(contactDocRef, "contacts", userID);
-  const matcheePendingContactRef = doc(
-    contactDocRef,
-    "pendingContacts",
-    userID
-  );
-
   const userNewContactRef = doc(
     profileCollectionRef,
     userID,
@@ -48,7 +38,18 @@ export function PendingContactCard({ contactDocRef }) {
     "pendingContacts",
     contactDocRef?.id
   );
+  // Matchee user variables
+  const matcheeNewContactRef = doc(contactDocRef, "contacts", userID);
+  const matcheePendingContactRef = doc(
+    contactDocRef,
+    "pendingContacts",
+    userID
+  );
 
+  // ContactDoc is fetched.
+  useFetchRealtimeDoc(contactDocRef, setContact);
+
+  // Method for accepting a pending match
   // 1. Adds users to contacts
   // ... Add users to ignorLists (already done when matchRequest sent.: simply remove pending contact)
   // 2. Remove users from pendingContacts
@@ -84,7 +85,6 @@ export function PendingContactCard({ contactDocRef }) {
     } catch (error) {
       console.log("Cannot remove pendingMatch doc for user ", error);
     }
-
     try {
       await deleteDoc(matcheePendingContactRef);
     } catch (error) {
@@ -92,6 +92,7 @@ export function PendingContactCard({ contactDocRef }) {
     }
   };
 
+  // Method for declining a user request
   // ... Add user to ignoreList (User is already on ignoreList (feedCarousel))
   // 2. Remove user from pendingContacts
   const handleDecline = async () => {

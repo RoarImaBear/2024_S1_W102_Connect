@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { collection, getDocs, onSnapshot } from "@firebase/firestore";
+import { getDocs, onSnapshot } from "@firebase/firestore";
 
+// Method for onetime fetching Firestore Collection, returning an array of contained docs
 export const useFetchCollection = (collectionRef, setData) => {
   useEffect(() => {
     const fetchData = async () => {
@@ -19,13 +20,8 @@ export const useFetchCollection = (collectionRef, setData) => {
   }, []);
 };
 
-// try {
-//   await updateDoc(docRef, { [fieldName]: newValue });
-// } catch (error) {
-//   if (error.code === "not-found") {
-//     await setDoc(docRef, { [fieldName]: newValue });
-//   }
-// }
+// Method for subscribing to a Firestore Collection in realtime, returning an array of contained docs
+// and updating it as changes emerge.
 export const useFetchRealtimeCollection = (ref, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(ref, (querySnapshot) => {
@@ -39,6 +35,8 @@ export const useFetchRealtimeCollection = (ref, setData) => {
   }, []);
 };
 
+// Method for subsctibing to a Firestore Doc, returning the doc object and updating as changes
+// are made
 export const useFetchRealtimeDoc = (ref, setData) => {
   useEffect(() => {
     const unsubscribe = onSnapshot(ref, (doc) => {
@@ -52,45 +50,4 @@ export const useFetchRealtimeDoc = (ref, setData) => {
     return () => unsubscribe();
   }, []);
 };
-
-// Not usable in current state.
-export const useFetchNestedCollection = (docRef, collectionName, setData) => {
-  useEffect(() => {
-    const unsubscribe = onSnapshot(docRef, (doc) => {
-      if (doc.exists) {
-        let fetchedData = doc;
-
-        fetchedData = collection(doc.ref, { collectionName });
-
-        setData(fetchedData);
-      } else {
-        setData("failed to load");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-};
-
 export default useFetchRealtimeCollection;
-
-// const [contacts, setContacts] = useState({});
-
-// useFetchRealtimeDoc (
-//   doc(firestore, `accounts/${location}/users/${userID}/matchmaking/contacts`),
-//   setContacts
-// );
-
-// const [contact, setContact] = useState({});
-// useEffect(() => {
-//   if (contacts && contacts[userID]) {
-//     const unsubscribe = onSnapshot(contacts["sean"], (doc) => {
-//       if (doc.exists) {
-//         const fetchedData = doc.data();
-//         setContact(fetchedData);
-//       } else {
-//         console.log("failed to load doc");
-//       }
-//     });
-//     return () => unsubscribe();
-//   }
-// }, [contacts]);

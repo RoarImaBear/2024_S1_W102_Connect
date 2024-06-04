@@ -19,6 +19,7 @@ jest.mock("../../contexts/AuthContext", () => ({
   }),
 }));
 
+// Testing if PendingContactCard mounts
 test("should render a contact card match card if one exists", () => {
   render(<PendingContactCard userID={testDocRef} />);
   const contactCard = screen.getByTestId("PendingContactCard");
