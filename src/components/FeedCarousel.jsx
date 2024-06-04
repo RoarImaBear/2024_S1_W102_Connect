@@ -15,16 +15,17 @@ export default function FeedCarousel() {
   const { currentUser } = useAuth();
   const userID = currentUser.uid;
   const userProfileRef = doc(firestore, `accounts/${location}/users/${userID}`);
-
   const profileCollectionRef = collection(
     firestore,
     "accounts",
     location,
     "users"
   );
+
   const [currentIndex, setIndex] = useState(0);
-  const [profileFeed, setProfileFeed] = useState({}); // << Profile Collection
-  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed); // << Fetches Profiles
+  const [profileFeed, setProfileFeed] = useState({});
+
+  useFetchRealtimeCollection(profileCollectionRef, setProfileFeed);
 
   console.log(profileFeed);
 
@@ -51,7 +52,6 @@ export default function FeedCarousel() {
   // 2. Add matchee to ignoreList
   // 3. Add user to matchee's ignoreList
   // 4. AddButton triggers next profile.
-  // 5. handlePrevOrNext filters against ignoreList
 
   function AddButton({ matchee }) {
     const handleConnect = async () => {
